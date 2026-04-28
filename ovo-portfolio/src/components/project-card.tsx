@@ -1,19 +1,21 @@
+'use client';
+
 import { useLocale, useTranslations } from 'next-intl';
 import { ExternalLink, Pin } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
-import { Card, CardBody } from '@/components/ui/card';
 import { Chip } from '@/components/ui/chip';
 import { skillById } from '@/data/skills-seed';
-import { formatDateRange } from '@/lib/utils';
+import { formatDateRange, cn } from '@/lib/utils';
 import type { Locale, Project } from '@/types';
 
 interface ProjectCardProps {
   project: Project;
+  onOpen: () => void;
 }
 
 const MAX_SKILLS_PREVIEW = 5;
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, onOpen }: ProjectCardProps) {
   const locale = useLocale() as Locale;
   const t = useTranslations('projects');
 
@@ -24,8 +26,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const hiddenCount = skills.length - visibleSkills.length;
 
   return (
-    <Card className="flex h-full flex-col">
-      <CardBody className="flex flex-1 flex-col gap-4">
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`${t('openDetails')} — ${project.title[locale]}`}
+      aria-haspopup="dialog"
+      className={cn(
+        'group relative flex h-full w-full flex-col rounded-[8px] border border-border bg-background-subtle text-left',
+        'transition-colors duration-200 hover:border-border-strong hover:bg-background-muted',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]'
+      )}
+    >
+      <div className="flex flex-1 flex-col gap-4 p-5 md:p-6">
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -64,31 +76,25 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <div className="mt-auto flex items-center gap-3 pt-2 text-caption">
           {project.demoUrl ? (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-foreground-muted transition-colors duration-150 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
-              aria-label={`${t('viewDemo')} — ${project.title[locale]}`}
+            <span
+              className="inline-flex items-center gap-1 text-foreground-muted"
+              aria-hidden
             >
-              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              <ExternalLink className="h-3.5 w-3.5" />
               <span>{t('viewDemo')}</span>
-            </a>
+            </span>
           ) : null}
           {project.githubUrl ? (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-foreground-muted transition-colors duration-150 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
-              aria-label={`${t('viewGithub')} — ${project.title[locale]}`}
+            <span
+              className="inline-flex items-center gap-1 text-foreground-muted"
+              aria-hidden
             >
-              <GithubIcon className="h-3.5 w-3.5" aria-hidden />
+              <GithubIcon className="h-3.5 w-3.5" />
               <span>{t('viewGithub')}</span>
-            </a>
+            </span>
           ) : null}
         </div>
-      </CardBody>
-    </Card>
+      </div>
+    </button>
   );
 }

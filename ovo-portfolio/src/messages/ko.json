@@ -59,7 +59,19 @@
     "role": "역할",
     "team": "팀 규모",
     "contribution": "기여도",
-    "people": "{count}명"
+    "people": "{count}명",
+    "openDetails": "상세 보기",
+    "modalLabel": "프로젝트 상세",
+    "close": "닫기",
+    "skills": "사용 스킬",
+    "overview": "개요",
+    "demoEmbed": "데모",
+    "issues": "이슈 & 해결",
+    "issueProblem": "문제",
+    "issueSolution": "해결",
+    "issueOutcome": "결과",
+    "expand": "펼치기",
+    "collapse": "접기"
   },
   "footer": {
     "copyright": "© 2026 오리"

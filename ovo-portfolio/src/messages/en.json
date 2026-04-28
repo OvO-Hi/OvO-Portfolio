@@ -59,7 +59,19 @@
     "role": "Role",
     "team": "Team",
     "contribution": "Contribution",
-    "people": "{count}"
+    "people": "{count}",
+    "openDetails": "View details",
+    "modalLabel": "Project details",
+    "close": "Close",
+    "skills": "Skills",
+    "overview": "Overview",
+    "demoEmbed": "Demo",
+    "issues": "Issues & Solutions",
+    "issueProblem": "Problem",
+    "issueSolution": "Solution",
+    "issueOutcome": "Outcome",
+    "expand": "Expand",
+    "collapse": "Collapse"
   },
   "footer": {
     "copyright": "© 2026 Ori"

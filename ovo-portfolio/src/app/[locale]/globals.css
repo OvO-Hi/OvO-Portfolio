@@ -83,3 +83,199 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Markdown content — design-token styles via descendant selectors */
+.markdown-body > :first-child {
+  margin-top: 0;
+}
+.markdown-body > :last-child {
+  margin-bottom: 0;
+}
+.markdown-body p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+.markdown-body a {
+  color: var(--accent);
+  text-underline-offset: 2px;
+}
+.markdown-body a:hover,
+.markdown-body a:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+.markdown-body ul,
+.markdown-body ol {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+}
+.markdown-body ul {
+  list-style: disc;
+}
+.markdown-body ol {
+  list-style: decimal;
+}
+.markdown-body li {
+  margin: 0.375rem 0;
+  line-height: 1.7;
+}
+.markdown-body li::marker {
+  color: var(--text-subtle);
+}
+.markdown-body h1,
+.markdown-body h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+.markdown-body h3,
+.markdown-body h4 {
+  margin: 1rem 0 0.5rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.markdown-body strong {
+  font-weight: 600;
+  color: var(--text);
+}
+.markdown-body blockquote {
+  margin: 0.75rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border-strong);
+  color: var(--text-subtle);
+  font-style: italic;
+}
+.markdown-body hr {
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+.markdown-body :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background: var(--bg-muted);
+  color: var(--text);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+}
+.markdown-body pre {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.markdown-body pre code {
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 1rem 0;
+}
+.markdown-body th,
+.markdown-body td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.markdown-body th {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Code highlight (rehype-highlight) — token colors mapped to design tokens */
+.markdown-body .hljs {
+  color: var(--text);
+  background: transparent;
+}
+.markdown-body .hljs-comment,
+.markdown-body .hljs-quote {
+  color: var(--text-subtle);
+  font-style: italic;
+}
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-selector-tag,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-section,
+.markdown-body .hljs-link {
+  color: var(--accent);
+  font-weight: 600;
+}
+.markdown-body .hljs-string,
+.markdown-body .hljs-attr,
+.markdown-body .hljs-template-tag,
+.markdown-body .hljs-template-variable,
+.markdown-body .hljs-addition {
+  color: var(--accent-hover);
+}
+.markdown-body .hljs-number,
+.markdown-body .hljs-meta,
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-builtin-name,
+.markdown-body .hljs-type,
+.markdown-body .hljs-symbol,
+.markdown-body .hljs-bullet {
+  color: var(--text-muted);
+}
+.markdown-body .hljs-title,
+.markdown-body .hljs-name,
+.markdown-body .hljs-selector-id,
+.markdown-body .hljs-selector-class {
+  color: var(--text);
+  font-weight: 600;
+}
+.markdown-body .hljs-emphasis {
+  font-style: italic;
+}
+.markdown-body .hljs-strong {
+  font-weight: 700;
+}
+
+/* Modal surface — elevated above page (bg) and cards (bg-subtle) */
+.modal-surface {
+  background-color: var(--bg-muted);
+  box-shadow:
+    0 12px 32px -12px rgba(0, 0, 0, 0.18),
+    0 4px 12px -4px rgba(0, 0, 0, 0.08);
+}
+.dark .modal-surface {
+  box-shadow:
+    0 16px 48px -12px rgba(0, 0, 0, 0.6),
+    0 4px 12px -4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Modal motion */
+@keyframes modal-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modal-overlay-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes modal-content-in {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes modal-content-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.98); }
+}
+@keyframes modal-sheet-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes modal-sheet-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(16px); }
+}
