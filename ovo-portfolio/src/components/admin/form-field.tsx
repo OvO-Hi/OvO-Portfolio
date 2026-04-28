@@ -1,0 +1,144 @@
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
+
+interface FieldShellProps {
+  label: string;
+  htmlFor: string;
+  hint?: string;
+  error?: string;
+  required?: boolean;
+  children: React.ReactNode;
+}
+
+function FieldShell({ label, htmlFor, hint, error, required, children }: FieldShellProps) {
+  const hintId = hint ? `${htmlFor}-hint` : undefined;
+  const errorId = error ? `${htmlFor}-error` : undefined;
+
+  return (
+    <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
+      <label
+        htmlFor={htmlFor}
+        className="pt-2 text-body font-medium text-foreground md:text-right"
+      >
+        {label}
+        {required ? (
+          <span aria-hidden className="ml-1 text-accent">
+            *
+          </span>
+        ) : null}
+      </label>
+      <div className="space-y-1.5">
+        {children}
+        {hint && !error ? (
+          <p id={hintId} className="text-caption text-foreground-subtle">
+            {hint}
+          </p>
+        ) : null}
+        {error ? (
+          <p
+            id={errorId}
+            role="alert"
+            className="inline-flex items-center gap-1 text-caption text-accent"
+          >
+            <span aria-hidden>⚠</span>
+            <span>{error}</span>
+          </p>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+const inputClass = (hasError: boolean) =>
+  cn(
+    'block w-full rounded-sm border bg-background-subtle px-3 py-2 text-body text-foreground placeholder:text-foreground-subtle',
+    'transition-colors duration-150',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
+    hasError
+      ? 'border-accent focus-visible:ring-[var(--accent)]'
+      : 'border-border hover:border-border-strong focus-visible:ring-[var(--border-strong)] focus-visible:border-border-strong'
+  );
+
+interface InputFieldProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 'className'> {
+  label: string;
+  name: string;
+  hint?: string;
+  error?: string;
+}
+
+export function InputField({
+  label,
+  name,
+  hint,
+  error,
+  required,
+  type = 'text',
+  ...props
+}: InputFieldProps) {
+  const id = `field-${name}`;
+  return (
+    <FieldShell
+      label={label}
+      htmlFor={id}
+      hint={hint}
+      error={error}
+      required={required}
+    >
+      <input
+        id={id}
+        name={name}
+        type={type}
+        required={required}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={[hint && !error ? `${id}-hint` : null, error ? `${id}-error` : null]
+          .filter(Boolean)
+          .join(' ') || undefined}
+        className={inputClass(Boolean(error))}
+        {...props}
+      />
+    </FieldShell>
+  );
+}
+
+interface TextareaFieldProps
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id' | 'className'> {
+  label: string;
+  name: string;
+  hint?: string;
+  error?: string;
+}
+
+export function TextareaField({
+  label,
+  name,
+  hint,
+  error,
+  required,
+  rows = 4,
+  ...props
+}: TextareaFieldProps) {
+  const id = `field-${name}`;
+  return (
+    <FieldShell
+      label={label}
+      htmlFor={id}
+      hint={hint}
+      error={error}
+      required={required}
+    >
+      <textarea
+        id={id}
+        name={name}
+        rows={rows}
+        required={required}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={[hint && !error ? `${id}-hint` : null, error ? `${id}-error` : null]
+          .filter(Boolean)
+          .join(' ') || undefined}
+        className={cn(inputClass(Boolean(error)), 'resize-y leading-[1.6]')}
+        {...props}
+      />
+    </FieldShell>
+  );
+}

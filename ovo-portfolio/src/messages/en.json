@@ -83,5 +83,75 @@
   },
   "locale": {
     "toggle": "Toggle language"
+  },
+  "admin": {
+    "siteTitle": "OvO Admin",
+    "nav": {
+      "profile": "Profile",
+      "about": "About",
+      "education": "Education",
+      "skills": "Skills",
+      "certifications": "Awards",
+      "experience": "Experience",
+      "projects": "Projects",
+      "comingSoon": "Coming soon"
+    },
+    "header": {
+      "viewSite": "View site",
+      "signOut": "Sign out",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "signedInAs": "Signed in as {name}"
+    },
+    "common": {
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "cancel": "Cancel",
+      "add": "Add",
+      "remove": "Remove",
+      "optional": "Optional"
+    },
+    "errors": {
+      "unauthorized": "Not authorized.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidUrl": "Enter a valid URL.",
+      "required": "Required.",
+      "saveFailed": "Could not save. Please try again."
+    },
+    "home": {
+      "title": "Admin dashboard",
+      "welcome": "Welcome, {name}.",
+      "hint": "Pick a section from the sidebar to edit."
+    },
+    "profile": {
+      "title": "Edit profile",
+      "subtitle": "Information shown in the Hero section on the home page.",
+      "fields": {
+        "nameKo": "Name (Korean)",
+        "nameEn": "Name (English)",
+        "taglineKo": "Tagline (Korean)",
+        "taglineEn": "Tagline (English)",
+        "email": "Email",
+        "phone": "Phone",
+        "github": "GitHub URL",
+        "profileImage": "Profile image URL"
+      },
+      "hints": {
+        "github": "e.g. https://github.com/yourname",
+        "profileImage": "Leave blank to show the OvO monogram."
+      }
+    },
+    "about": {
+      "title": "Edit about",
+      "subtitle": "Self-introduction paragraphs for the About section.",
+      "tabKo": "한국어",
+      "tabEn": "English",
+      "paragraphLabel": "Paragraph {n}",
+      "addParagraph": "Add paragraph",
+      "removeParagraph": "Remove",
+      "paragraphPlaceholder": "Write a paragraph.",
+      "empty": "No paragraphs yet. Click ‘Add paragraph’ to start."
+    }
   }
 }
