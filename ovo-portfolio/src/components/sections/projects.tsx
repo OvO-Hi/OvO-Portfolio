@@ -1,17 +1,11 @@
-import { useTranslations } from 'next-intl';
-import { projects } from '@/data/dummy';
+import { getTranslations } from 'next-intl/server';
+import { getProjects } from '@/lib/queries';
 import { SectionHeading } from './section-heading';
 import { ProjectsClient } from '@/components/projects-client';
 
-export function Projects() {
-  const t = useTranslations('projects');
-
-  const visible = projects
-    .filter((p) => p.visible)
-    .sort((a, b) => {
-      if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
-      return a.order - b.order;
-    });
+export async function Projects() {
+  const t = await getTranslations('projects');
+  const projects = await getProjects();
 
   return (
     <section
@@ -20,7 +14,7 @@ export function Projects() {
       className="container-prose scroll-mt-24 py-16 md:py-24"
     >
       <SectionHeading id="projects-title" eyebrow="06" title={t('title')} />
-      <ProjectsClient projects={visible} />
+      <ProjectsClient projects={projects} />
     </section>
   );
 }

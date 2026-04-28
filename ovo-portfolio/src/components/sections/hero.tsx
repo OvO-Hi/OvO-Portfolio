@@ -1,12 +1,13 @@
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Mail, Phone } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
-import { profile } from '@/data/dummy';
+import { getProfile } from '@/lib/queries';
 import type { Locale } from '@/types';
 
-export function Hero() {
-  const locale = useLocale() as Locale;
-  const t = useTranslations('hero');
+export async function Hero() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations('hero');
+  const profile = await getProfile();
 
   return (
     <section className="container-prose pt-20 pb-16 md:pt-32 md:pb-24" aria-labelledby="hero-name">

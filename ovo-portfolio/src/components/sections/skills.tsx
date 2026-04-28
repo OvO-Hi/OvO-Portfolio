@@ -1,5 +1,5 @@
-import { useTranslations } from 'next-intl';
-import { skillsSeed } from '@/data/skills-seed';
+import { getTranslations } from 'next-intl/server';
+import { getSkills } from '@/lib/queries';
 import { SectionHeading } from './section-heading';
 import { Chip } from '@/components/ui/chip';
 import type { SkillCategory } from '@/types';
@@ -47,12 +47,13 @@ const PHASE_1_FEATURED: Set<string> = new Set([
   'claude-code',
 ]);
 
-export function Skills() {
-  const t = useTranslations('skills');
+export async function Skills() {
+  const t = await getTranslations('skills');
+  const skills = await getSkills();
 
   const grouped = CATEGORY_ORDER.map((cat) => ({
     category: cat,
-    items: skillsSeed.filter((s) => s.category === cat && PHASE_1_FEATURED.has(s.id)),
+    items: skills.filter((s) => s.category === cat && PHASE_1_FEATURED.has(s.id)),
   })).filter((g) => g.items.length > 0);
 
   return (

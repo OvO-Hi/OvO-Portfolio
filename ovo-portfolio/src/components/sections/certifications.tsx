@@ -1,12 +1,13 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { certifications } from '@/data/dummy';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { getCertifications } from '@/lib/queries';
 import { SectionHeading } from './section-heading';
 import { Chip } from '@/components/ui/chip';
 import type { Locale } from '@/types';
 
-export function Certifications() {
-  const locale = useLocale() as Locale;
-  const t = useTranslations('certifications');
+export async function Certifications() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations('certifications');
+  const certifications = await getCertifications();
 
   return (
     <section

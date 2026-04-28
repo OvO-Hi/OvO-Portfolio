@@ -1,12 +1,13 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { experiences } from '@/data/dummy';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { getExperiences } from '@/lib/queries';
 import { SectionHeading } from './section-heading';
 import { formatDateRange } from '@/lib/utils';
 import type { Locale } from '@/types';
 
-export function Experience() {
-  const locale = useLocale() as Locale;
-  const t = useTranslations('experience');
+export async function Experience() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations('experience');
+  const experiences = await getExperiences();
 
   return (
     <section

@@ -1,11 +1,12 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { aboutContent } from '@/data/dummy';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { getAbout } from '@/lib/queries';
 import { SectionHeading } from './section-heading';
 import type { Locale } from '@/types';
 
-export function About() {
-  const locale = useLocale() as Locale;
-  const t = useTranslations('about');
+export async function About() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations('about');
+  const about = await getAbout();
 
   return (
     <section
@@ -15,7 +16,7 @@ export function About() {
     >
       <SectionHeading id="about-title" eyebrow="01" title={t('title')} />
       <div className="max-w-[68ch] space-y-4 text-body text-foreground-muted">
-        {aboutContent.paragraphs[locale].map((p, i) => (
+        {about.paragraphs[locale].map((p, i) => (
           <p key={i}>{p}</p>
         ))}
       </div>

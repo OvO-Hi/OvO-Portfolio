@@ -1,0 +1,181 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----- Enums -----
+
+enum SkillCategory {
+  language
+  frontend
+  backend
+  mobile
+  database
+  ai
+  devops
+  tool
+}
+
+enum EducationStatus {
+  enrolled
+  graduated
+  leave
+  extraSemester      @map("extra-semester")
+  graduationDeferred @map("graduation-deferred")
+}
+
+enum CertificationType {
+  certification
+  language
+  award
+}
+
+enum DateGranularity {
+  day
+  month
+}
+
+// ----- Singletons (id = "default") -----
+
+model Profile {
+  id           String   @id
+  nameKo       String
+  nameEn       String
+  taglineKo    String
+  taglineEn    String
+  email        String
+  phone        String
+  github       String
+  profileImage String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model AboutContent {
+  id           String   @id
+  paragraphsKo String[]
+  paragraphsEn String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ----- Lists -----
+
+model Education {
+  id        String          @id @default(cuid())
+  schoolKo  String
+  schoolEn  String
+  majorKo   String
+  majorEn   String
+  status    EducationStatus
+  startDate String
+  endDate   String
+  gpaValue  String?
+  gpaMax    String?
+  gpaHidden Boolean?
+  order     Int             @default(0)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model Skill {
+  id        String         @id
+  name      String
+  category  SkillCategory
+  iconKey   String?
+  order     Int            @default(0)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  projects  ProjectSkill[]
+}
+
+model Certification {
+  id        String            @id @default(cuid())
+  nameKo    String
+  nameEn    String
+  issuerKo  String
+  issuerEn  String
+  date      String
+  type      CertificationType
+  score     String?
+  order     Int               @default(0)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model Experience {
+  id             String   @id @default(cuid())
+  organizationKo String
+  organizationEn String
+  roleKo         String
+  roleEn         String
+  startDate      String
+  endDate        String
+  descriptionKo  String
+  descriptionEn  String
+  order          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Project {
+  id              String          @id @default(cuid())
+  slug            String          @unique
+  titleKo         String
+  titleEn         String
+  oneLinerKo      String
+  oneLinerEn      String
+  startDate       String
+  endDate         String
+  dateGranularity DateGranularity
+  roleKo          String?
+  roleEn          String?
+  teamSize        Int?
+  contribution    Int?
+  descriptionKo   String
+  descriptionEn   String
+  demoUrl         String?
+  githubUrl       String?
+  thumbnailUrl    String?
+  pinned          Boolean         @default(false)
+  visible         Boolean         @default(true)
+  order           Int             @default(0)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  skills          ProjectSkill[]
+  issues          ProjectIssue[]
+}
+
+model ProjectIssue {
+  id         String   @id @default(cuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  titleKo    String
+  titleEn    String
+  problemKo  String
+  problemEn  String
+  solutionKo String
+  solutionEn String
+  outcomeKo  String?
+  outcomeEn  String?
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([projectId])
+}
+
+model ProjectSkill {
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  skillId   String
+  skill     Skill   @relation(fields: [skillId], references: [id], onDelete: Restrict)
+  order     Int     @default(0)
+
+  @@id([projectId, skillId])
+  @@index([skillId])
+}

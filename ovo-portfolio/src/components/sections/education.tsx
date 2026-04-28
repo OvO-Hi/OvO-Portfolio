@@ -1,13 +1,14 @@
-import { useLocale, useTranslations } from 'next-intl';
-import { educations } from '@/data/dummy';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { getEducations } from '@/lib/queries';
 import { SectionHeading } from './section-heading';
 import { Chip } from '@/components/ui/chip';
 import { formatDateRange } from '@/lib/utils';
 import type { Locale } from '@/types';
 
-export function Education() {
-  const locale = useLocale() as Locale;
-  const t = useTranslations('education');
+export async function Education() {
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations('education');
+  const educations = await getEducations();
 
   return (
     <section
