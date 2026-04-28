@@ -14,12 +14,20 @@ import type {
 
 const SINGLETON_ID = 'default';
 
-const educationStatusReverse: Record<DbEducationStatus, Education['status']> = {
+export const educationStatusReverse: Record<DbEducationStatus, Education['status']> = {
   enrolled: 'enrolled',
   graduated: 'graduated',
   leave: 'leave',
   extraSemester: 'extra-semester',
   graduationDeferred: 'graduation-deferred',
+};
+
+export const educationStatusForward: Record<Education['status'], DbEducationStatus> = {
+  enrolled: 'enrolled',
+  graduated: 'graduated',
+  leave: 'leave',
+  'extra-semester': 'extraSemester',
+  'graduation-deferred': 'graduationDeferred',
 };
 
 export const getProfile = cache(async (): Promise<Profile> => {
@@ -44,6 +52,7 @@ export const getAbout = cache(async (): Promise<AboutContent> => {
 export const getEducations = cache(async (): Promise<Education[]> => {
   const rows = await prisma.education.findMany({ orderBy: { order: 'asc' } });
   return rows.map((r) => ({
+    id: r.id,
     school: { ko: r.schoolKo, en: r.schoolEn },
     major: { ko: r.majorKo, en: r.majorEn },
     status: educationStatusReverse[r.status],
@@ -69,6 +78,7 @@ export const getSkills = cache(async (): Promise<Skill[]> => {
 export const getCertifications = cache(async (): Promise<Certification[]> => {
   const rows = await prisma.certification.findMany({ orderBy: { order: 'asc' } });
   return rows.map((r) => ({
+    id: r.id,
     name: { ko: r.nameKo, en: r.nameEn },
     issuer: { ko: r.issuerKo, en: r.issuerEn },
     date: r.date,

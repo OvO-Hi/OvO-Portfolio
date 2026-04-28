@@ -5,7 +5,8 @@ import { useTranslations } from 'next-intl';
 import { InputField } from '@/components/admin/form-field';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
-import { updateProfile, type ProfileActionState } from './actions';
+import { updateProfile } from './actions';
+import type { ProfileActionState } from './types';
 import type { Profile } from '@/types';
 
 interface ProfileFormProps {

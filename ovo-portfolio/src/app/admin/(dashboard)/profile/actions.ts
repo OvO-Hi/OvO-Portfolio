@@ -3,11 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
-
-export type ProfileActionState =
-  | { status: 'idle' }
-  | { status: 'success' }
-  | { status: 'error'; errors?: Record<string, string>; formError?: string };
+import type { ProfileActionState } from './types';
 
 const SINGLETON_ID = 'default';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -110,14 +110,21 @@
       "cancel": "취소",
       "add": "추가",
       "remove": "제거",
-      "optional": "선택"
+      "optional": "선택",
+      "edit": "편집",
+      "delete": "삭제",
+      "close": "닫기",
+      "yes": "네",
+      "no": "아니오"
     },
     "errors": {
       "unauthorized": "권한이 없습니다.",
       "invalidEmail": "올바른 이메일 형식이 아닙니다.",
       "invalidUrl": "올바른 URL 형식이 아닙니다.",
+      "invalidDate": "YYYY-MM 형식으로 입력해주세요.",
       "required": "필수 항목입니다.",
-      "saveFailed": "저장에 실패했습니다. 다시 시도해주세요."
+      "saveFailed": "저장에 실패했습니다. 다시 시도해주세요.",
+      "deleteFailed": "삭제에 실패했습니다. 다시 시도해주세요."
     },
     "home": {
       "title": "관리자 대시보드",
@@ -152,6 +159,62 @@
       "removeParagraph": "문단 제거",
       "paragraphPlaceholder": "한 문단을 입력하세요.",
       "empty": "문단이 없습니다. ‘문단 추가’를 눌러 시작하세요."
+    },
+    "education": {
+      "title": "학력 관리",
+      "subtitle": "메인 페이지 학력 섹션에 표시되는 항목입니다. 시작일 최신순으로 정렬됩니다.",
+      "addNew": "학력 추가",
+      "newItem": "새 학력",
+      "deleteConfirm": "이 학력 항목을 삭제할까요?",
+      "empty": "등록된 학력이 없습니다.",
+      "fields": {
+        "schoolKo": "학교 (한국어)",
+        "schoolEn": "학교 (영어)",
+        "majorKo": "전공 (한국어)",
+        "majorEn": "전공 (영어)",
+        "status": "상태",
+        "startDate": "시작",
+        "endDate": "종료",
+        "gpa": "성적 (GPA)",
+        "gpaValue": "취득 학점",
+        "gpaMax": "만점",
+        "gpaHidden": "메인 사이트에 점수 숨김"
+      }
+    },
+    "certifications": {
+      "title": "자격·수상 관리",
+      "subtitle": "자격증·어학 점수·수상 내역. 취득일 최신순으로 정렬됩니다.",
+      "addNew": "항목 추가",
+      "newItem": "새 항목",
+      "deleteConfirm": "이 항목을 삭제할까요?",
+      "empty": "등록된 항목이 없습니다.",
+      "fields": {
+        "nameKo": "이름 (한국어)",
+        "nameEn": "이름 (영어)",
+        "issuerKo": "발급기관 (한국어)",
+        "issuerEn": "발급기관 (영어)",
+        "type": "분류",
+        "date": "취득일",
+        "score": "점수"
+      }
+    },
+    "experience": {
+      "title": "경력 관리",
+      "subtitle": "회사·동아리·크루 등 경력/대외활동. 시작일 최신순으로 정렬됩니다.",
+      "addNew": "경력 추가",
+      "newItem": "새 경력",
+      "deleteConfirm": "이 경력 항목을 삭제할까요?",
+      "empty": "등록된 경력이 없습니다.",
+      "fields": {
+        "organizationKo": "소속 (한국어)",
+        "organizationEn": "소속 (영어)",
+        "roleKo": "역할 (한국어)",
+        "roleEn": "역할 (영어)",
+        "startDate": "시작",
+        "endDate": "종료",
+        "descriptionKo": "한 줄 설명 (한국어)",
+        "descriptionEn": "한 줄 설명 (영어)"
+      }
     }
   }
 }

@@ -3,11 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
-
-export type AboutActionState =
-  | { status: 'idle' }
-  | { status: 'success' }
-  | { status: 'error'; formError?: string };
+import type { AboutActionState } from './types';
 
 const SINGLETON_ID = 'default';
 

@@ -12,6 +12,7 @@ export interface Profile {
 }
 
 export interface Education {
+  id?: string;
   school: Localized<string>;
   major: Localized<string>;
   status: 'enrolled' | 'graduated' | 'leave' | 'extra-semester' | 'graduation-deferred';
@@ -68,6 +69,7 @@ export interface Project {
 }
 
 export interface Certification {
+  id?: string;
   name: Localized<string>;
   issuer: Localized<string>;
   date: string;

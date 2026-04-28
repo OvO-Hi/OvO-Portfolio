@@ -6,7 +6,8 @@ import { LangTabs } from '@/components/admin/lang-tabs';
 import { ParagraphListEditor } from '@/components/admin/paragraph-list-editor';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
-import { updateAbout, type AboutActionState } from './actions';
+import { updateAbout } from './actions';
+import type { AboutActionState } from './types';
 import type { AboutContent } from '@/types';
 
 interface AboutFormProps {

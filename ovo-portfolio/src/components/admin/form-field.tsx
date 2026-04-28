@@ -1,4 +1,8 @@
-import type { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import type {
+  InputHTMLAttributes,
+  SelectHTMLAttributes,
+  TextareaHTMLAttributes,
+} from 'react';
 import { cn } from '@/lib/utils';
 
 interface FieldShellProps {
@@ -140,5 +144,80 @@ export function TextareaField({
         {...props}
       />
     </FieldShell>
+  );
+}
+
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface SelectFieldProps
+  extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'id' | 'className'> {
+  label: string;
+  name: string;
+  hint?: string;
+  error?: string;
+  options: SelectOption[];
+}
+
+export function SelectField({
+  label,
+  name,
+  options,
+  hint,
+  error,
+  required,
+  ...props
+}: SelectFieldProps) {
+  const id = `field-${name}`;
+  return (
+    <FieldShell
+      label={label}
+      htmlFor={id}
+      hint={hint}
+      error={error}
+      required={required}
+    >
+      <select
+        id={id}
+        name={name}
+        required={required}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={[hint && !error ? `${id}-hint` : null, error ? `${id}-error` : null]
+          .filter(Boolean)
+          .join(' ') || undefined}
+        className={cn(inputClass(Boolean(error)), 'appearance-none pr-8')}
+        {...props}
+      >
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+    </FieldShell>
+  );
+}
+
+export function DateMonthField({
+  label,
+  name,
+  hint,
+  error,
+  required,
+  ...props
+}: Omit<InputFieldProps, 'type'>) {
+  return (
+    <InputField
+      label={label}
+      name={name}
+      type="month"
+      hint={hint}
+      error={error}
+      required={required}
+      placeholder="YYYY-MM"
+      {...props}
+    />
   );
 }

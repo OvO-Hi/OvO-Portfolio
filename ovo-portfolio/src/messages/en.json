@@ -110,14 +110,21 @@
       "cancel": "Cancel",
       "add": "Add",
       "remove": "Remove",
-      "optional": "Optional"
+      "optional": "Optional",
+      "edit": "Edit",
+      "delete": "Delete",
+      "close": "Close",
+      "yes": "Yes",
+      "no": "No"
     },
     "errors": {
       "unauthorized": "Not authorized.",
       "invalidEmail": "Enter a valid email address.",
       "invalidUrl": "Enter a valid URL.",
+      "invalidDate": "Use YYYY-MM format.",
       "required": "Required.",
-      "saveFailed": "Could not save. Please try again."
+      "saveFailed": "Could not save. Please try again.",
+      "deleteFailed": "Could not delete. Please try again."
     },
     "home": {
       "title": "Admin dashboard",
@@ -152,6 +159,62 @@
       "removeParagraph": "Remove",
       "paragraphPlaceholder": "Write a paragraph.",
       "empty": "No paragraphs yet. Click ‘Add paragraph’ to start."
+    },
+    "education": {
+      "title": "Manage education",
+      "subtitle": "Items shown in the Education section, sorted by start date (newest first).",
+      "addNew": "Add education",
+      "newItem": "New education",
+      "deleteConfirm": "Delete this education item?",
+      "empty": "No education entries yet.",
+      "fields": {
+        "schoolKo": "School (Korean)",
+        "schoolEn": "School (English)",
+        "majorKo": "Major (Korean)",
+        "majorEn": "Major (English)",
+        "status": "Status",
+        "startDate": "Start",
+        "endDate": "End",
+        "gpa": "GPA",
+        "gpaValue": "Score",
+        "gpaMax": "Max",
+        "gpaHidden": "Hide score on public site"
+      }
+    },
+    "certifications": {
+      "title": "Manage awards",
+      "subtitle": "Certifications, language tests, and awards. Sorted by acquisition date (newest first).",
+      "addNew": "Add item",
+      "newItem": "New item",
+      "deleteConfirm": "Delete this item?",
+      "empty": "No items yet.",
+      "fields": {
+        "nameKo": "Name (Korean)",
+        "nameEn": "Name (English)",
+        "issuerKo": "Issuer (Korean)",
+        "issuerEn": "Issuer (English)",
+        "type": "Type",
+        "date": "Date",
+        "score": "Score"
+      }
+    },
+    "experience": {
+      "title": "Manage experience",
+      "subtitle": "Companies, clubs, crews. Sorted by start date (newest first).",
+      "addNew": "Add experience",
+      "newItem": "New experience",
+      "deleteConfirm": "Delete this experience?",
+      "empty": "No experience entries yet.",
+      "fields": {
+        "organizationKo": "Organization (Korean)",
+        "organizationEn": "Organization (English)",
+        "roleKo": "Role (Korean)",
+        "roleEn": "Role (English)",
+        "startDate": "Start",
+        "endDate": "End",
+        "descriptionKo": "Description (Korean)",
+        "descriptionEn": "Description (English)"
+      }
     }
   }
 }
