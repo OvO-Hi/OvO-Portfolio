@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "about": "소개",
+    "education": "학력",
+    "skills": "기술",
+    "certifications": "자격·수상",
+    "experience": "경력",
+    "projects": "프로젝트"
+  },
+  "hero": {
+    "contactEmail": "이메일",
+    "contactPhone": "전화",
+    "contactGithub": "깃허브"
+  },
+  "about": {
+    "title": "소개"
+  },
+  "education": {
+    "title": "학력",
+    "status": {
+      "enrolled": "재학",
+      "graduated": "졸업",
+      "leave": "휴학",
+      "extra-semester": "추가학기",
+      "graduation-deferred": "졸업유예"
+    },
+    "gpaLabel": "학점"
+  },
+  "skills": {
+    "title": "기술 스택",
+    "category": {
+      "language": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "database": "Database",
+      "ai": "AI / GenAI",
+      "devops": "DevOps / Cloud",
+      "tool": "Tools"
+    }
+  },
+  "certifications": {
+    "title": "자격증·어학·수상",
+    "type": {
+      "certification": "자격증",
+      "language": "어학",
+      "award": "수상"
+    },
+    "scoreLabel": "점수"
+  },
+  "experience": {
+    "title": "경력 / 대외활동"
+  },
+  "projects": {
+    "title": "프로젝트",
+    "pinned": "대표작",
+    "viewDemo": "데모",
+    "viewGithub": "GitHub",
+    "role": "역할",
+    "team": "팀 규모",
+    "contribution": "기여도",
+    "people": "{count}명"
+  },
+  "footer": {
+    "copyright": "© 2026 오리"
+  },
+  "theme": {
+    "toggle": "테마 전환",
+    "light": "라이트",
+    "dark": "다크"
+  },
+  "locale": {
+    "toggle": "언어 전환"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "about": "About",
+    "education": "Education",
+    "skills": "Skills",
+    "certifications": "Awards",
+    "experience": "Experience",
+    "projects": "Projects"
+  },
+  "hero": {
+    "contactEmail": "Email",
+    "contactPhone": "Phone",
+    "contactGithub": "GitHub"
+  },
+  "about": {
+    "title": "About"
+  },
+  "education": {
+    "title": "Education",
+    "status": {
+      "enrolled": "Enrolled",
+      "graduated": "Graduated",
+      "leave": "On Leave",
+      "extra-semester": "Extra Semester",
+      "graduation-deferred": "Graduation Deferred"
+    },
+    "gpaLabel": "GPA"
+  },
+  "skills": {
+    "title": "Skills",
+    "category": {
+      "language": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "database": "Database",
+      "ai": "AI / GenAI",
+      "devops": "DevOps / Cloud",
+      "tool": "Tools"
+    }
+  },
+  "certifications": {
+    "title": "Certifications & Awards",
+    "type": {
+      "certification": "Certification",
+      "language": "Language",
+      "award": "Award"
+    },
+    "scoreLabel": "Score"
+  },
+  "experience": {
+    "title": "Experience"
+  },
+  "projects": {
+    "title": "Projects",
+    "pinned": "Pinned",
+    "viewDemo": "Demo",
+    "viewGithub": "GitHub",
+    "role": "Role",
+    "team": "Team",
+    "contribution": "Contribution",
+    "people": "{count}"
+  },
+  "footer": {
+    "copyright": "© 2026 Ori"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "locale": {
+    "toggle": "Toggle language"
+  }
+}

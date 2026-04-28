@@ -1,0 +1,53 @@
+# Cursor Rules — OvO Portfolio
+
+## Context
+This is a developer portfolio site (Korean/English toggle) built with Next.js 14 App Router, TypeScript, Tailwind, PostgreSQL (Neon), Prisma.
+Owner: 오리 — Ewha Womans University, Computer Engineering, graduating Feb 2027.
+
+**Always read `SPEC.md` and `CLAUDE.md` before significant changes.**
+
+## Current Phase
+Phase 1: Static version with dummy data. Design system + main page only.
+**Do NOT implement** modals, DB, auth, image upload, markdown rendering, drag-drop, filters.
+
+## Design Tokens (strict)
+- Color base: monochrome (black / white / gray)
+- Accent: slate blue (`#4a6fa5` light, `#6b8cc4` dark) — use CSS variables
+- No arbitrary Tailwind colors. Use semantic tokens only.
+- Fonts: Pretendard (KR) + Inter (EN) for sans, Geist Mono for mono
+- Container max-width 1100px
+- Border radius: 8px cards, 6px buttons/tags, 999px chips/avatar
+
+## Conventions
+- Functional components, named exports
+- kebab-case filenames, PascalCase component names
+- Use `cn()` helper for class composition
+- No `any` — use `unknown` if truly unknown
+- All user-facing text via `next-intl` messages
+- Minimize `"use client"` — prefer Server Components
+- Every interactive element: aria-label, visible focus state
+
+## File Structure
+```
+src/
+  app/[locale]/
+  components/sections/
+  components/ui/
+  lib/
+  data/
+  i18n/
+  messages/
+  types/
+```
+
+## Style Tone Reference
+Linear + Vercel + Rauno + Brittany Chiang blended.
+Restrained color, generous whitespace, sharp typography hierarchy.
+
+## What Cursor should NOT do
+- Add libraries without checking SPEC.md
+- Hardcode Korean/English strings
+- Use arbitrary Tailwind colors (e.g. `bg-blue-500`)
+- Implement features outside Phase 1 scope
+- Add `console.log` in committed code
+- Skip TypeScript types
