@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { ExternalLink, LogOut, Menu, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { signOutAction } from '@/app/admin/(dashboard)/actions';
 
 interface HeaderProps {
@@ -51,6 +52,8 @@ export function Header({ userName, onToggleMenu, isMenuOpen }: HeaderProps) {
         >
           {userName}
         </span>
+
+        <ThemeToggle />
 
         <form action={signOutAction}>
           <button

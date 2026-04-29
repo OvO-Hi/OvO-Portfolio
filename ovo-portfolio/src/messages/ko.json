@@ -10,7 +10,9 @@
   "hero": {
     "contactEmail": "이메일",
     "contactPhone": "전화",
-    "contactGithub": "깃허브"
+    "contactGithub": "깃허브",
+    "copyPhone": "전화번호 복사",
+    "phoneCopied": "복사됨"
   },
   "about": {
     "title": "소개"
@@ -74,7 +76,7 @@
     "collapse": "접기"
   },
   "footer": {
-    "copyright": "© 2026 오리",
+    "copyright": "© 2026 OvO",
     "downloadResume": "PDF 이력서 다운로드"
   },
   "theme": {
@@ -171,7 +173,7 @@
     },
     "profile": {
       "title": "프로필 편집",
-      "subtitle": "메인 페이지 Hero 섹션에 표시되는 정보입니다.",
+      "subtitle": "프로필 섹션에 표시되는 정보입니다.",
       "fields": {
         "nameKo": "이름 (한국어)",
         "nameEn": "이름 (영어)",

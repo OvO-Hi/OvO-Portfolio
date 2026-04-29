@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Mail, Phone } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
+import { PhoneCopy } from '@/components/phone-copy';
 import { getProfile } from '@/lib/queries';
 import type { Locale } from '@/types';
 
@@ -78,14 +79,17 @@ export async function Hero() {
                 <span className="font-mono">GitHub</span>
               </a>
             </li>
-            <li className="group inline-flex items-center gap-1.5">
-              <Phone className="h-3.5 w-3.5" aria-hidden />
-              <span className="font-mono opacity-0 transition-opacity duration-150 group-hover:opacity-100 focus-within:opacity-100">
-                {profile.phone}
+            <li className="group inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5">
+                <Phone className="h-3.5 w-3.5" aria-hidden />
+                <span className="font-mono opacity-0 transition-opacity duration-150 group-hover:opacity-100 focus-within:opacity-100">
+                  {profile.phone}
+                </span>
+                <span className="font-mono group-hover:hidden focus-within:hidden">
+                  {t('contactPhone')}
+                </span>
               </span>
-              <span className="font-mono group-hover:hidden focus-within:hidden">
-                {t('contactPhone')}
-              </span>
+              <PhoneCopy phone={profile.phone} />
             </li>
           </ul>
         </div>

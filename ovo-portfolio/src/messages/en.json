@@ -10,7 +10,9 @@
   "hero": {
     "contactEmail": "Email",
     "contactPhone": "Phone",
-    "contactGithub": "GitHub"
+    "contactGithub": "GitHub",
+    "copyPhone": "Copy phone number",
+    "phoneCopied": "Copied"
   },
   "about": {
     "title": "About"
@@ -74,7 +76,7 @@
     "collapse": "Collapse"
   },
   "footer": {
-    "copyright": "© 2026 Ori",
+    "copyright": "© 2026 OvO",
     "downloadResume": "Download résumé PDF"
   },
   "theme": {
@@ -171,7 +173,7 @@
     },
     "profile": {
       "title": "Edit profile",
-      "subtitle": "Information shown in the Hero section on the home page.",
+      "subtitle": "Information shown in the profile section.",
       "fields": {
         "nameKo": "Name (Korean)",
         "nameEn": "Name (English)",
