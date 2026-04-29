@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@/components/admin/form-field';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
+import { TranslateButton } from '@/components/admin/translate-button';
 import { createCertification, updateCertification } from './actions';
 import { certificationInitialState, type CertificationActionState } from './types';
 import type { Certification } from '@/types';
@@ -25,6 +26,11 @@ const TYPE_VALUES: Certification['type'][] = ['certification', 'language', 'awar
 export function CertificationForm({ initial, onSuccess, onCancel }: CertificationFormProps) {
   const t = useTranslations('admin');
   const tType = useTranslations('certifications.type');
+
+  const [nameKo, setNameKo] = useState(initial?.name.ko ?? '');
+  const [nameEn, setNameEn] = useState(initial?.name.en ?? '');
+  const [issuerKo, setIssuerKo] = useState(initial?.issuer.ko ?? '');
+  const [issuerEn, setIssuerEn] = useState(initial?.issuer.en ?? '');
 
   const action = initial
     ? updateCertification.bind(null, initial.id)
@@ -53,30 +59,52 @@ export function CertificationForm({ initial, onSuccess, onCancel }: Certificatio
         <InputField
           label={t('certifications.fields.nameKo')}
           name="nameKo"
-          defaultValue={initial?.name.ko}
+          value={nameKo}
+          onChange={(e) => setNameKo(e.target.value)}
           error={errorFor('nameKo')}
           required
         />
         <InputField
           label={t('certifications.fields.nameEn')}
           name="nameEn"
-          defaultValue={initial?.name.en}
+          value={nameEn}
+          onChange={(e) => setNameEn(e.target.value)}
           error={errorFor('nameEn')}
           required
+          translateButton={
+            <TranslateButton
+              koValue={nameKo}
+              existingEnValue={nameEn}
+              fieldLabel={t('certifications.fields.nameEn')}
+              context="Certification, language test, or award name"
+              onTranslated={setNameEn}
+            />
+          }
         />
         <InputField
           label={t('certifications.fields.issuerKo')}
           name="issuerKo"
-          defaultValue={initial?.issuer.ko}
+          value={issuerKo}
+          onChange={(e) => setIssuerKo(e.target.value)}
           error={errorFor('issuerKo')}
           required
         />
         <InputField
           label={t('certifications.fields.issuerEn')}
           name="issuerEn"
-          defaultValue={initial?.issuer.en}
+          value={issuerEn}
+          onChange={(e) => setIssuerEn(e.target.value)}
           error={errorFor('issuerEn')}
           required
+          translateButton={
+            <TranslateButton
+              koValue={issuerKo}
+              existingEnValue={issuerEn}
+              fieldLabel={t('certifications.fields.issuerEn')}
+              context="Issuer organization name"
+              onTranslated={setIssuerEn}
+            />
+          }
         />
       </div>
 

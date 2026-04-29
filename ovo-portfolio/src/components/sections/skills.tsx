@@ -15,46 +15,17 @@ const CATEGORY_ORDER: SkillCategory[] = [
   'tool',
 ];
 
-const PHASE_1_FEATURED: Set<string> = new Set([
-  'java',
-  'python',
-  'javascript',
-  'typescript',
-  'react',
-  'nextjs',
-  'tailwind',
-  'spring-boot',
-  'flask',
-  'jwt',
-  'rest',
-  'react-native',
-  'postgresql',
-  'mysql',
-  'prisma',
-  'claude',
-  'gpt-4',
-  'whisper',
-  'dalle-3',
-  'google-vision-ocr',
-  'aws',
-  'vercel',
-  'docker',
-  'git',
-  'github',
-  'figma',
-  'notion',
-  'cursor',
-  'claude-code',
-]);
-
 export async function Skills() {
   const t = await getTranslations('skills');
+  // getSkills already filters by visibility (ALWAYS_SHOW or AUTO+used)
   const skills = await getSkills();
 
   const grouped = CATEGORY_ORDER.map((cat) => ({
     category: cat,
-    items: skills.filter((s) => s.category === cat && PHASE_1_FEATURED.has(s.id)),
+    items: skills.filter((s) => s.category === cat),
   })).filter((g) => g.items.length > 0);
+
+  if (grouped.length === 0) return null;
 
   return (
     <section

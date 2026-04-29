@@ -66,12 +66,31 @@ export const getEducations = cache(async (): Promise<Education[]> => {
 });
 
 export const getSkills = cache(async (): Promise<Skill[]> => {
-  const rows = await prisma.skill.findMany({ orderBy: { order: 'asc' } });
+  // Public surface rule:
+  //  - ALWAYS_SHOW: always visible
+  //  - AUTO + linked to at least one project: visible
+  //  - HIDDEN: never visible
+  //  - AUTO + no project: filtered out
+  const rows = await prisma.skill.findMany({
+    where: {
+      OR: [
+        { visibility: 'ALWAYS_SHOW' },
+        {
+          AND: [
+            { visibility: 'AUTO' },
+            { projects: { some: {} } },
+          ],
+        },
+      ],
+    },
+    orderBy: [{ category: 'asc' }, { order: 'asc' }, { name: 'asc' }],
+  });
   return rows.map((r) => ({
     id: r.id,
     name: r.name,
     category: r.category,
     iconKey: r.iconKey ?? undefined,
+    visibility: r.visibility,
   }));
 });
 

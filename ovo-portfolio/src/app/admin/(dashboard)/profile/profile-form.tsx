@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { InputField } from '@/components/admin/form-field';
 import { ImageUpload } from '@/components/admin/image-upload';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
+import { TranslateButton } from '@/components/admin/translate-button';
 import { updateProfile } from './actions';
 import type { ProfileActionState } from './types';
 import type { Profile } from '@/types';
@@ -19,6 +21,9 @@ const initialState: ProfileActionState = { status: 'idle' };
 export function ProfileForm({ initial }: ProfileFormProps) {
   const [state, formAction] = useFormState(updateProfile, initialState);
   const t = useTranslations('admin');
+
+  const [taglineKo, setTaglineKo] = useState(initial.tagline.ko);
+  const [taglineEn, setTaglineEn] = useState(initial.tagline.en);
 
   const errors = state.status === 'error' ? state.errors ?? {} : {};
   const errorFor = (key: string): string | undefined => {
@@ -53,16 +58,27 @@ export function ProfileForm({ initial }: ProfileFormProps) {
         <InputField
           label={t('profile.fields.taglineKo')}
           name="taglineKo"
-          defaultValue={initial.tagline.ko}
+          value={taglineKo}
+          onChange={(e) => setTaglineKo(e.target.value)}
           error={errorFor('taglineKo')}
           required
         />
         <InputField
           label={t('profile.fields.taglineEn')}
           name="taglineEn"
-          defaultValue={initial.tagline.en}
+          value={taglineEn}
+          onChange={(e) => setTaglineEn(e.target.value)}
           error={errorFor('taglineEn')}
           required
+          translateButton={
+            <TranslateButton
+              koValue={taglineKo}
+              existingEnValue={taglineEn}
+              fieldLabel={t('profile.fields.taglineEn')}
+              context="One-line introduction shown in the portfolio header"
+              onTranslated={setTaglineEn}
+            />
+          }
         />
         <InputField
           label={t('profile.fields.email')}

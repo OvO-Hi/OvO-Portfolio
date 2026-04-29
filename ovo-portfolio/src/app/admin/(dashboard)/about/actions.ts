@@ -14,11 +14,8 @@ function getAdminEmails() {
     .filter(Boolean);
 }
 
-function readList(formData: FormData, name: string): string[] {
-  return formData
-    .getAll(name)
-    .map((v) => v.toString().trim())
-    .filter((v) => v.length > 0);
+function readListRaw(formData: FormData, name: string): string[] {
+  return formData.getAll(name).map((v) => v.toString().trim());
 }
 
 export async function updateAbout(
@@ -31,8 +28,19 @@ export async function updateAbout(
     return { status: 'error', formError: 'unauthorized' };
   }
 
-  const paragraphsKo = readList(formData, 'paragraphsKo');
-  const paragraphsEn = readList(formData, 'paragraphsEn');
+  const koRaw = readListRaw(formData, 'paragraphsKo');
+  const enRaw = readListRaw(formData, 'paragraphsEn');
+  const len = Math.max(koRaw.length, enRaw.length);
+
+  // Zip + filter: keep paragraphs where at least one side has content (index aligned).
+  const pairs: Array<{ ko: string; en: string }> = [];
+  for (let i = 0; i < len; i++) {
+    const ko = koRaw[i] ?? '';
+    const en = enRaw[i] ?? '';
+    if (ko || en) pairs.push({ ko, en });
+  }
+  const paragraphsKo = pairs.map((p) => p.ko);
+  const paragraphsEn = pairs.map((p) => p.en);
 
   try {
     await prisma.aboutContent.upsert({

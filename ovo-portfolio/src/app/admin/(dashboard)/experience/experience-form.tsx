@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@/components/admin/form-field';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
+import { TranslateButton } from '@/components/admin/translate-button';
 import { createExperience, updateExperience } from './actions';
 import { experienceInitialState, type ExperienceActionState } from './types';
 import type { Experience } from '@/types';
@@ -22,6 +23,13 @@ interface ExperienceFormProps {
 
 export function ExperienceForm({ initial, onSuccess, onCancel }: ExperienceFormProps) {
   const t = useTranslations('admin');
+
+  const [organizationKo, setOrganizationKo] = useState(initial?.organization.ko ?? '');
+  const [organizationEn, setOrganizationEn] = useState(initial?.organization.en ?? '');
+  const [roleKo, setRoleKo] = useState(initial?.role.ko ?? '');
+  const [roleEn, setRoleEn] = useState(initial?.role.en ?? '');
+  const [descriptionKo, setDescriptionKo] = useState(initial?.description.ko ?? '');
+  const [descriptionEn, setDescriptionEn] = useState(initial?.description.en ?? '');
 
   const action = initial
     ? updateExperience.bind(null, initial.id)
@@ -48,28 +56,50 @@ export function ExperienceForm({ initial, onSuccess, onCancel }: ExperienceFormP
         <InputField
           label={t('experience.fields.organizationKo')}
           name="organizationKo"
-          defaultValue={initial?.organization.ko}
+          value={organizationKo}
+          onChange={(e) => setOrganizationKo(e.target.value)}
           error={errorFor('organizationKo')}
           required
         />
         <InputField
           label={t('experience.fields.organizationEn')}
           name="organizationEn"
-          defaultValue={initial?.organization.en}
+          value={organizationEn}
+          onChange={(e) => setOrganizationEn(e.target.value)}
           error={errorFor('organizationEn')}
           required
+          translateButton={
+            <TranslateButton
+              koValue={organizationKo}
+              existingEnValue={organizationEn}
+              fieldLabel={t('experience.fields.organizationEn')}
+              context="Company / club / crew name"
+              onTranslated={setOrganizationEn}
+            />
+          }
         />
         <InputField
           label={t('experience.fields.roleKo')}
           name="roleKo"
-          defaultValue={initial?.role.ko}
+          value={roleKo}
+          onChange={(e) => setRoleKo(e.target.value)}
           error={errorFor('roleKo')}
         />
         <InputField
           label={t('experience.fields.roleEn')}
           name="roleEn"
-          defaultValue={initial?.role.en}
+          value={roleEn}
+          onChange={(e) => setRoleEn(e.target.value)}
           error={errorFor('roleEn')}
+          translateButton={
+            <TranslateButton
+              koValue={roleKo}
+              existingEnValue={roleEn}
+              fieldLabel={t('experience.fields.roleEn')}
+              context="Role / position title"
+              onTranslated={setRoleEn}
+            />
+          }
         />
         <DateMonthField
           label={t('experience.fields.startDate')}
@@ -90,16 +120,27 @@ export function ExperienceForm({ initial, onSuccess, onCancel }: ExperienceFormP
       <TextareaField
         label={t('experience.fields.descriptionKo')}
         name="descriptionKo"
-        defaultValue={initial?.description.ko}
+        value={descriptionKo}
+        onChange={(e) => setDescriptionKo(e.target.value)}
         error={errorFor('descriptionKo')}
         rows={2}
       />
       <TextareaField
         label={t('experience.fields.descriptionEn')}
         name="descriptionEn"
-        defaultValue={initial?.description.en}
+        value={descriptionEn}
+        onChange={(e) => setDescriptionEn(e.target.value)}
         error={errorFor('descriptionEn')}
         rows={2}
+        translateButton={
+          <TranslateButton
+            koValue={descriptionKo}
+            existingEnValue={descriptionEn}
+            fieldLabel={t('experience.fields.descriptionEn')}
+            context="One-line description of the experience"
+            onTranslated={setDescriptionEn}
+          />
+        }
       />
 
       <div className="flex justify-end gap-2 pt-2">

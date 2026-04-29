@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Plus, X } from 'lucide-react';
 import { LangTabs } from '@/components/admin/lang-tabs';
 import { MarkdownEditor } from '@/components/admin/markdown-editor';
+import { TranslateButton } from '@/components/admin/translate-button';
 import { cn } from '@/lib/utils';
 import type { IssueDraft } from './types';
 
@@ -135,7 +136,18 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                 }
                 enContent={
                   <div className="space-y-4">
-                    <Field label={t('titleEn')}>
+                    <Field
+                      label={t('titleEn')}
+                      translateButton={
+                        <TranslateButton
+                          koValue={item.data.titleKo}
+                          existingEnValue={item.data.titleEn}
+                          fieldLabel={t('titleEn')}
+                          context="Issue title — short heading"
+                          onTranslated={(v) => update(item.id, 'titleEn', v)}
+                        />
+                      }
+                    >
                       <input
                         type="text"
                         value={item.data.titleEn}
@@ -143,7 +155,18 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                         className={inputClass}
                       />
                     </Field>
-                    <Field label={t('problemEn')}>
+                    <Field
+                      label={t('problemEn')}
+                      translateButton={
+                        <TranslateButton
+                          koValue={item.data.problemKo}
+                          existingEnValue={item.data.problemEn}
+                          fieldLabel={t('problemEn')}
+                          context="Issue — problem statement (markdown)"
+                          onTranslated={(v) => update(item.id, 'problemEn', v)}
+                        />
+                      }
+                    >
                       <MarkdownEditor
                         value={item.data.problemEn}
                         onChange={(v) => update(item.id, 'problemEn', v)}
@@ -151,7 +174,18 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                         ariaLabel={t('problemEn')}
                       />
                     </Field>
-                    <Field label={t('solutionEn')}>
+                    <Field
+                      label={t('solutionEn')}
+                      translateButton={
+                        <TranslateButton
+                          koValue={item.data.solutionKo}
+                          existingEnValue={item.data.solutionEn}
+                          fieldLabel={t('solutionEn')}
+                          context="Issue — solution / approach (markdown)"
+                          onTranslated={(v) => update(item.id, 'solutionEn', v)}
+                        />
+                      }
+                    >
                       <MarkdownEditor
                         value={item.data.solutionEn}
                         onChange={(v) => update(item.id, 'solutionEn', v)}
@@ -159,7 +193,18 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                         ariaLabel={t('solutionEn')}
                       />
                     </Field>
-                    <Field label={t('outcomeEn')}>
+                    <Field
+                      label={t('outcomeEn')}
+                      translateButton={
+                        <TranslateButton
+                          koValue={item.data.outcomeKo}
+                          existingEnValue={item.data.outcomeEn}
+                          fieldLabel={t('outcomeEn')}
+                          context="Issue — outcome / impact (markdown, optional)"
+                          onTranslated={(v) => update(item.id, 'outcomeEn', v)}
+                        />
+                      }
+                    >
                       <MarkdownEditor
                         value={item.data.outcomeEn}
                         onChange={(v) => update(item.id, 'outcomeEn', v)}
@@ -187,13 +232,24 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  translateButton,
+  children,
+}: {
+  label: string;
+  translateButton?: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <label className="space-y-1">
-      <span className="block text-caption font-medium text-foreground-subtle">
-        {label}
-      </span>
+    <div className="space-y-1">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="block text-caption font-medium text-foreground-subtle">
+          {label}
+        </span>
+        {translateButton}
+      </div>
       {children}
-    </label>
+    </div>
   );
 }

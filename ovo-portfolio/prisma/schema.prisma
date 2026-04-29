@@ -39,6 +39,12 @@ enum DateGranularity {
   month
 }
 
+enum SkillVisibility {
+  AUTO
+  ALWAYS_SHOW
+  HIDDEN
+}
+
 // ----- Singletons (id = "default") -----
 
 model Profile {
@@ -83,15 +89,16 @@ model Education {
 }
 
 model Skill {
-  id        String         @id
-  name      String
-  category  SkillCategory
-  iconKey   String?
-  isSystem  Boolean        @default(false)
-  order     Int            @default(0)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  projects  ProjectSkill[]
+  id         String          @id
+  name       String
+  category   SkillCategory
+  iconKey    String?
+  isSystem   Boolean         @default(false)
+  visibility SkillVisibility @default(AUTO)
+  order      Int             @default(0)
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  projects   ProjectSkill[]
 }
 
 model Certification {
@@ -230,4 +237,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ----- Admin settings (single row, id = 1) -----
+
+model Settings {
+  id              Int      @id @default(1)
+  anthropicApiKey String?
+  updatedAt       DateTime @updatedAt
 }

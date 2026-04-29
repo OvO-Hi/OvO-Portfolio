@@ -2,10 +2,9 @@
 
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
-import { LangTabs } from '@/components/admin/lang-tabs';
-import { ParagraphListEditor } from '@/components/admin/paragraph-list-editor';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
+import { AboutParagraphsEditor } from './about-paragraphs-editor';
 import { updateAbout } from './actions';
 import type { AboutActionState } from './types';
 import type { AboutContent } from '@/types';
@@ -29,15 +28,9 @@ export function AboutForm({ initial }: AboutFormProps) {
         <StatusMessage variant="error">{t(`errors.${state.formError}`)}</StatusMessage>
       ) : null}
 
-      <LangTabs
-        koLabel={t('about.tabKo')}
-        enLabel={t('about.tabEn')}
-        koContent={
-          <ParagraphListEditor name="paragraphsKo" initial={initial.paragraphs.ko} />
-        }
-        enContent={
-          <ParagraphListEditor name="paragraphsEn" initial={initial.paragraphs.en} />
-        }
+      <AboutParagraphsEditor
+        initialKo={initial.paragraphs.ko}
+        initialEn={initial.paragraphs.en}
       />
 
       <div className="flex justify-end pt-2">

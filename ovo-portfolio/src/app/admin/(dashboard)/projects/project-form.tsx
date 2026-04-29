@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import {
@@ -15,6 +15,7 @@ import { MarkdownEditor } from '@/components/admin/markdown-editor';
 import { MultiSelect, type MultiSelectOption } from '@/components/admin/multi-select';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
+import { TranslateButton } from '@/components/admin/translate-button';
 import { IssueListEditor } from './issue-list-editor';
 import { createProject, updateProject } from './actions';
 import { createSkillQuick } from '../skills/actions';
@@ -36,6 +37,15 @@ interface ProjectFormProps {
 export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFormProps) {
   const t = useTranslations('admin');
   const tSkillCategory = useTranslations('skills.category');
+
+  const [titleKo, setTitleKo] = useState(initial?.title.ko ?? '');
+  const [titleEn, setTitleEn] = useState(initial?.title.en ?? '');
+  const [oneLinerKo, setOneLinerKo] = useState(initial?.oneLiner.ko ?? '');
+  const [oneLinerEn, setOneLinerEn] = useState(initial?.oneLiner.en ?? '');
+  const [roleKo, setRoleKo] = useState(initial?.role?.ko ?? '');
+  const [roleEn, setRoleEn] = useState(initial?.role?.en ?? '');
+  const [descriptionKo, setDescriptionKo] = useState(initial?.description.ko ?? '');
+  const [descriptionEn, setDescriptionEn] = useState(initial?.description.en ?? '');
 
   const action =
     initial?.id !== undefined
@@ -90,30 +100,52 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
           <InputField
             label={t('projects.fields.titleKo')}
             name="titleKo"
-            defaultValue={initial?.title.ko}
+            value={titleKo}
+            onChange={(e) => setTitleKo(e.target.value)}
             error={errorFor('titleKo')}
             required
           />
           <InputField
             label={t('projects.fields.titleEn')}
             name="titleEn"
-            defaultValue={initial?.title.en}
+            value={titleEn}
+            onChange={(e) => setTitleEn(e.target.value)}
             error={errorFor('titleEn')}
             required
+            translateButton={
+              <TranslateButton
+                koValue={titleKo}
+                existingEnValue={titleEn}
+                fieldLabel={t('projects.fields.titleEn')}
+                context="Project title (keep proper nouns intact)"
+                onTranslated={setTitleEn}
+              />
+            }
           />
           <InputField
             label={t('projects.fields.oneLinerKo')}
             name="oneLinerKo"
-            defaultValue={initial?.oneLiner.ko}
+            value={oneLinerKo}
+            onChange={(e) => setOneLinerKo(e.target.value)}
             error={errorFor('oneLinerKo')}
             required
           />
           <InputField
             label={t('projects.fields.oneLinerEn')}
             name="oneLinerEn"
-            defaultValue={initial?.oneLiner.en}
+            value={oneLinerEn}
+            onChange={(e) => setOneLinerEn(e.target.value)}
             error={errorFor('oneLinerEn')}
             required
+            translateButton={
+              <TranslateButton
+                koValue={oneLinerKo}
+                existingEnValue={oneLinerEn}
+                fieldLabel={t('projects.fields.oneLinerEn')}
+                context="One-line project description for the project card"
+                onTranslated={setOneLinerEn}
+              />
+            }
           />
         </div>
 
@@ -148,14 +180,25 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
           <InputField
             label={t('projects.fields.roleKo')}
             name="roleKo"
-            defaultValue={initial?.role?.ko}
+            value={roleKo}
+            onChange={(e) => setRoleKo(e.target.value)}
             error={errorFor('roleKo')}
           />
           <InputField
             label={t('projects.fields.roleEn')}
             name="roleEn"
-            defaultValue={initial?.role?.en}
+            value={roleEn}
+            onChange={(e) => setRoleEn(e.target.value)}
             error={errorFor('roleEn')}
+            translateButton={
+              <TranslateButton
+                koValue={roleKo}
+                existingEnValue={roleEn}
+                fieldLabel={t('projects.fields.roleEn')}
+                context="My role on this project (e.g., Backend Lead)"
+                onTranslated={setRoleEn}
+              />
+            }
           />
           <InputField
             label={t('projects.fields.teamSize')}
@@ -264,7 +307,8 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
             <DescriptionPane
               ariaLabel={t('projects.fields.descriptionKo')}
               name="descriptionKo"
-              defaultValue={initial?.description.ko}
+              value={descriptionKo}
+              onChange={setDescriptionKo}
               error={errorFor('descriptionKo')}
             />
           }
@@ -272,8 +316,18 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
             <DescriptionPane
               ariaLabel={t('projects.fields.descriptionEn')}
               name="descriptionEn"
-              defaultValue={initial?.description.en}
+              value={descriptionEn}
+              onChange={setDescriptionEn}
               error={errorFor('descriptionEn')}
+              translateButton={
+                <TranslateButton
+                  koValue={descriptionKo}
+                  existingEnValue={descriptionEn}
+                  fieldLabel={t('projects.fields.descriptionEn')}
+                  context="Detailed project description (markdown)"
+                  onTranslated={setDescriptionEn}
+                />
+              }
             />
           }
         />
@@ -312,16 +366,29 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 interface DescriptionPaneProps {
   name: string;
   ariaLabel: string;
-  defaultValue?: string;
+  value: string;
+  onChange: (value: string) => void;
   error?: string;
+  translateButton?: React.ReactNode;
 }
 
-function DescriptionPane({ name, ariaLabel, defaultValue, error }: DescriptionPaneProps) {
+function DescriptionPane({
+  name,
+  ariaLabel,
+  value,
+  onChange,
+  error,
+  translateButton,
+}: DescriptionPaneProps) {
   return (
     <div className="space-y-1.5">
+      {translateButton ? (
+        <div className="flex justify-end">{translateButton}</div>
+      ) : null}
       <MarkdownEditor
         name={name}
-        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         rows={12}
         ariaLabel={ariaLabel}
         required

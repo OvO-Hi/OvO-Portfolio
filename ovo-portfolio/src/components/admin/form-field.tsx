@@ -11,26 +11,38 @@ interface FieldShellProps {
   hint?: string;
   error?: string;
   required?: boolean;
+  translateButton?: React.ReactNode;
   children: React.ReactNode;
 }
 
-function FieldShell({ label, htmlFor, hint, error, required, children }: FieldShellProps) {
+function FieldShell({
+  label,
+  htmlFor,
+  hint,
+  error,
+  required,
+  translateButton,
+  children,
+}: FieldShellProps) {
   const hintId = hint ? `${htmlFor}-hint` : undefined;
   const errorId = error ? `${htmlFor}-error` : undefined;
 
   return (
     <div className="space-y-1.5">
-      <label
-        htmlFor={htmlFor}
-        className="block text-caption font-medium text-foreground"
-      >
-        {label}
-        {required ? (
-          <span aria-hidden className="ml-1 text-accent">
-            *
-          </span>
-        ) : null}
-      </label>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <label
+          htmlFor={htmlFor}
+          className="block text-caption font-medium text-foreground"
+        >
+          {label}
+          {required ? (
+            <span aria-hidden className="ml-1 text-accent">
+              *
+            </span>
+          ) : null}
+        </label>
+        {translateButton}
+      </div>
       {children}
       {hint && !error ? (
         <p id={hintId} className="text-caption text-foreground-subtle">
@@ -67,6 +79,7 @@ interface InputFieldProps
   name: string;
   hint?: string;
   error?: string;
+  translateButton?: React.ReactNode;
 }
 
 export function InputField({
@@ -76,6 +89,7 @@ export function InputField({
   error,
   required,
   type = 'text',
+  translateButton,
   ...props
 }: InputFieldProps) {
   const id = `field-${name}`;
@@ -86,6 +100,7 @@ export function InputField({
       hint={hint}
       error={error}
       required={required}
+      translateButton={translateButton}
     >
       <input
         id={id}
@@ -109,6 +124,7 @@ interface TextareaFieldProps
   name: string;
   hint?: string;
   error?: string;
+  translateButton?: React.ReactNode;
 }
 
 export function TextareaField({
@@ -118,6 +134,7 @@ export function TextareaField({
   error,
   required,
   rows = 4,
+  translateButton,
   ...props
 }: TextareaFieldProps) {
   const id = `field-${name}`;
@@ -128,6 +145,7 @@ export function TextareaField({
       hint={hint}
       error={error}
       required={required}
+      translateButton={translateButton}
     >
       <textarea
         id={id}

@@ -31,12 +31,15 @@ export type SkillCategory =
   | 'devops'
   | 'tool';
 
+export type SkillVisibility = 'AUTO' | 'ALWAYS_SHOW' | 'HIDDEN';
+
 export interface Skill {
   id: string;
   name: string;
   category: SkillCategory;
   iconKey?: string;
   isSystem?: boolean;
+  visibility?: SkillVisibility;
 }
 
 export interface ProjectIssue {

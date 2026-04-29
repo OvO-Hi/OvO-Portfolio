@@ -122,6 +122,19 @@ export async function updateSkill(
   return { status: 'success' };
 }
 
+export async function updateSkillVisibility(
+  id: string,
+  visibility: 'AUTO' | 'ALWAYS_SHOW' | 'HIDDEN'
+): Promise<void> {
+  if (!(await isAdmin())) return;
+  try {
+    await prisma.skill.update({ where: { id }, data: { visibility } });
+  } catch {
+    // swallow
+  }
+  revalidatePath('/', 'layout');
+}
+
 export async function deleteSkill(id: string): Promise<void> {
   if (!(await isAdmin())) return;
 

@@ -97,6 +97,7 @@
       "certifications": "Awards",
       "experience": "Experience",
       "projects": "Projects",
+      "settings": "Settings",
       "comingSoon": "Coming soon"
     },
     "header": {
@@ -160,6 +161,7 @@
       "imageInvalidType": "Only JPG, PNG, or WebP are allowed.",
       "imageTooLarge": "Image must be 5MB or smaller.",
       "imageEmpty": "Please select a file.",
+      "invalidApiKey": "Not a valid Anthropic API key format.",
       "idTaken": "An item with this ID already exists.",
       "idInvalid": "ID may only contain lowercase letters, numbers, and hyphens.",
       "slugInvalid": "Slug may only contain lowercase letters, numbers, and hyphens.",
@@ -267,6 +269,16 @@
       "usageCount": "Used by {count} project(s)",
       "systemBadge": "Default",
       "systemTooltip": "System default skills cannot be modified or deleted.",
+      "visibility": {
+        "auto": "Auto",
+        "alwaysShow": "Always show",
+        "hidden": "Hidden",
+        "tooltipAuto": "Auto-appears on the public site when linked to a project.",
+        "tooltipUsed": "Visible — used by {projects}",
+        "tooltipNotUsed": "Not visible (add to a project to auto-show)",
+        "tooltipAlways": "Always shown on the public site",
+        "tooltipHidden": "Hidden from the public site"
+      },
       "quickAdd": "Create ‘{name}’",
       "quickAddHint": "Defaults to category ‘Tool’.",
       "fields": {
@@ -342,6 +354,49 @@
         "solutionEn": "Solution (English)",
         "outcomeKo": "Outcome (Korean, optional)",
         "outcomeEn": "Outcome (English, optional)"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "An Anthropic API key is required for the translation feature. The key is stored securely and never exposed on the public site.",
+      "fields": {
+        "apiKey": "Anthropic API key"
+      },
+      "currentKeyLabel": "Saved key",
+      "noKey": "No key saved.",
+      "consoleLink": "Get a key from Anthropic console",
+      "actions": {
+        "save": "Save",
+        "edit": "Edit",
+        "delete": "Delete",
+        "test": "Test",
+        "testing": "Testing…",
+        "cancel": "Cancel"
+      },
+      "messages": {
+        "saved": "API key saved.",
+        "deleted": "API key deleted.",
+        "testSuccess": "✓ Key works",
+        "testFailed": "✗ Test failed: {error}"
+      },
+      "deleteConfirm": "Delete the API key? Translation will be unavailable."
+    },
+    "translate": {
+      "button": "Translate",
+      "translating": "Translating…",
+      "modal": {
+        "title": "An English version already exists",
+        "body": "There is already content in the English field for ‘{field}’. How would you like to handle it?",
+        "refOption": "Translate referencing existing",
+        "refHint": "Match the style and tone of the existing English",
+        "overwriteOption": "Overwrite",
+        "overwriteHint": "Ignore existing and translate fresh",
+        "cancel": "Cancel"
+      },
+      "errors": {
+        "noApiKey": "No API key configured. Add one in Settings.",
+        "translateFailed": "Translation failed. Please try again.",
+        "koEmpty": "Enter Korean text first."
       }
     }
   }

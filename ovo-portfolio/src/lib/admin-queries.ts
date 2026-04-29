@@ -12,7 +12,10 @@ import type {
 export type AdminEducation = Education & { id: string };
 export type AdminCertification = Certification & { id: string };
 export type AdminExperience = Experience;
-export type AdminSkill = Skill & { usageCount: number };
+export type AdminSkill = Skill & {
+  usageCount: number;
+  projectTitles: string[];
+};
 export type AdminProject = Project;
 
 export async function getEducationsForAdmin(): Promise<AdminEducation[]> {
@@ -69,7 +72,12 @@ export async function getSkillsForAdmin(): Promise<AdminSkill[]> {
       { order: 'asc' },
       { name: 'asc' },
     ],
-    include: { _count: { select: { projects: true } } },
+    include: {
+      _count: { select: { projects: true } },
+      projects: {
+        select: { project: { select: { titleKo: true } } },
+      },
+    },
   });
   return rows.map((r) => ({
     id: r.id,
@@ -77,7 +85,9 @@ export async function getSkillsForAdmin(): Promise<AdminSkill[]> {
     category: r.category,
     iconKey: r.iconKey ?? undefined,
     isSystem: r.isSystem,
+    visibility: r.visibility,
     usageCount: r._count.projects,
+    projectTitles: r.projects.map((ps) => ps.project.titleKo),
   }));
 }
 
@@ -127,4 +137,10 @@ export async function getProjectsForAdmin(): Promise<AdminProject[]> {
       issues,
     };
   });
+}
+
+/** Server-only — returns the raw Anthropic API key from Settings (id=1), or null. */
+export async function getApiKey(): Promise<string | null> {
+  const row = await prisma.settings.findUnique({ where: { id: 1 } });
+  return row?.anthropicApiKey ?? null;
 }

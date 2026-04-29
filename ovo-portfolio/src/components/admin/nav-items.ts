@@ -5,7 +5,8 @@ export type AdminNavKey =
   | 'skills'
   | 'certifications'
   | 'experience'
-  | 'projects';
+  | 'projects'
+  | 'settings';
 
 export interface AdminNavItem {
   key: AdminNavKey;
@@ -21,4 +22,5 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
   { key: 'certifications', href: '/admin/certifications', enabled: true },
   { key: 'experience', href: '/admin/experience', enabled: true },
   { key: 'projects', href: '/admin/projects', enabled: true },
+  { key: 'settings', href: '/admin/settings', enabled: true },
 ];

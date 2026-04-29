@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import {
@@ -10,6 +10,7 @@ import {
 } from '@/components/admin/form-field';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
+import { TranslateButton } from '@/components/admin/translate-button';
 import { createEducation, updateEducation } from './actions';
 import { educationInitialState, type EducationActionState } from './types';
 import type { Education } from '@/types';
@@ -31,6 +32,11 @@ const STATUS_VALUES: Education['status'][] = [
 export function EducationForm({ initial, onSuccess, onCancel }: EducationFormProps) {
   const t = useTranslations('admin');
   const tStatus = useTranslations('education.status');
+
+  const [schoolKo, setSchoolKo] = useState(initial?.school.ko ?? '');
+  const [schoolEn, setSchoolEn] = useState(initial?.school.en ?? '');
+  const [majorKo, setMajorKo] = useState(initial?.major.ko ?? '');
+  const [majorEn, setMajorEn] = useState(initial?.major.en ?? '');
 
   const action = initial
     ? updateEducation.bind(null, initial.id)
@@ -62,30 +68,52 @@ export function EducationForm({ initial, onSuccess, onCancel }: EducationFormPro
         <InputField
           label={t('education.fields.schoolKo')}
           name="schoolKo"
-          defaultValue={initial?.school.ko}
+          value={schoolKo}
+          onChange={(e) => setSchoolKo(e.target.value)}
           error={errorFor('schoolKo')}
           required
         />
         <InputField
           label={t('education.fields.schoolEn')}
           name="schoolEn"
-          defaultValue={initial?.school.en}
+          value={schoolEn}
+          onChange={(e) => setSchoolEn(e.target.value)}
           error={errorFor('schoolEn')}
           required
+          translateButton={
+            <TranslateButton
+              koValue={schoolKo}
+              existingEnValue={schoolEn}
+              fieldLabel={t('education.fields.schoolEn')}
+              context="School name"
+              onTranslated={setSchoolEn}
+            />
+          }
         />
         <InputField
           label={t('education.fields.majorKo')}
           name="majorKo"
-          defaultValue={initial?.major.ko}
+          value={majorKo}
+          onChange={(e) => setMajorKo(e.target.value)}
           error={errorFor('majorKo')}
           required
         />
         <InputField
           label={t('education.fields.majorEn')}
           name="majorEn"
-          defaultValue={initial?.major.en}
+          value={majorEn}
+          onChange={(e) => setMajorEn(e.target.value)}
           error={errorFor('majorEn')}
           required
+          translateButton={
+            <TranslateButton
+              koValue={majorKo}
+              existingEnValue={majorEn}
+              fieldLabel={t('education.fields.majorEn')}
+              context="Academic major / department"
+              onTranslated={setMajorEn}
+            />
+          }
         />
       </div>
 

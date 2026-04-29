@@ -24,6 +24,14 @@ const educationStatusMap: Record<string, EducationStatus> = {
 async function main() {
   console.log('🌱 seeding...');
 
+  // Settings (single row id=1) — preserved across seed runs (no deleteMany)
+  await prisma.settings.upsert({
+    where: { id: 1 },
+    update: {},
+    create: { id: 1 },
+  });
+  console.log('  ✓ settings (preserved)');
+
   // Clear in dependency order
   await prisma.projectIssue.deleteMany();
   await prisma.projectSkill.deleteMany();
