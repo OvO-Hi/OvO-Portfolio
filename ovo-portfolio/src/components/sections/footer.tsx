@@ -1,11 +1,13 @@
-import { useTranslations } from 'next-intl';
-import { Mail } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { Download, Mail } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
 import { SecretTrigger } from '@/components/secret-trigger';
 import { profile } from '@/data/dummy';
+import type { Locale } from '@/types';
 
 export function Footer() {
   const t = useTranslations('footer');
+  const locale = useLocale() as Locale;
 
   return (
     <footer className="border-t border-border mt-16 md:mt-24">
@@ -13,7 +15,17 @@ export function Footer() {
         <p className="font-mono text-caption text-foreground-subtle">
           <SecretTrigger>{t('copyright')}</SecretTrigger>
         </p>
-        <ul className="flex items-center gap-4 text-caption text-foreground-muted">
+        <ul className="flex flex-wrap items-center gap-4 text-caption text-foreground-muted">
+          <li>
+            <a
+              href={`/api/resume?lang=${locale}`}
+              download={`ori-portfolio-${locale}.pdf`}
+              className="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
+            >
+              <Download className="h-3.5 w-3.5" aria-hidden />
+              <span className="font-mono">{t('downloadResume')}</span>
+            </a>
+          </li>
           <li>
             <a
               href={`mailto:${profile.email}`}

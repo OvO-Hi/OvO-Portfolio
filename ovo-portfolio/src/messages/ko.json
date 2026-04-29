@@ -74,7 +74,8 @@
     "collapse": "접기"
   },
   "footer": {
-    "copyright": "© 2026 오리"
+    "copyright": "© 2026 오리",
+    "downloadResume": "PDF 이력서 다운로드"
   },
   "theme": {
     "toggle": "테마 전환",

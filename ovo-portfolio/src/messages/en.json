@@ -74,7 +74,8 @@
     "collapse": "Collapse"
   },
   "footer": {
-    "copyright": "© 2026 Ori"
+    "copyright": "© 2026 Ori",
+    "downloadResume": "Download résumé PDF"
   },
   "theme": {
     "toggle": "Toggle theme",

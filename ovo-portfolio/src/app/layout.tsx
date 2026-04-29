@@ -4,9 +4,16 @@ import { inter, geistMono } from '@/lib/fonts';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+
 export const metadata: Metadata = {
-  title: 'Ori — Portfolio',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Ori — Portfolio',
+    template: '%s — Ori Portfolio',
+  },
   description: 'Backend developer & team lead. Senior at Ewha Computer Engineering.',
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
