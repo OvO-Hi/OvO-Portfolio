@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { ExternalLink, Pin } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
@@ -32,11 +33,23 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
       aria-label={`${t('openDetails')} — ${project.title[locale]}`}
       aria-haspopup="dialog"
       className={cn(
-        'group relative flex h-full w-full flex-col rounded-[8px] border border-border bg-background-subtle text-left',
+        'group relative flex h-full w-full flex-col overflow-hidden rounded-[8px] border border-border bg-background-subtle text-left',
         'transition-colors duration-200 hover:border-border-strong hover:bg-background-muted',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]'
       )}
     >
+      {project.thumbnailUrl ? (
+        <div className="relative aspect-video w-full overflow-hidden border-b border-border bg-background-muted">
+          <Image
+            src={project.thumbnailUrl}
+            alt=""
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          />
+        </div>
+      ) : null}
+
       <div className="flex flex-1 flex-col gap-4 p-5 md:p-6">
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-1">

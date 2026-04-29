@@ -135,6 +135,15 @@
       "createOption": "Create ‘{name}’",
       "createHint": "Defaults to category ‘Tool’; change later in /admin/skills."
     },
+    "imageUpload": {
+      "choose": "Choose image",
+      "drop": "Drag and drop or click",
+      "uploading": "Uploading…",
+      "remove": "Remove image",
+      "removing": "Removing…",
+      "constraints": "JPG · PNG · WebP, up to 5MB",
+      "noImage": "No image"
+    },
     "errors": {
       "unauthorized": "Not authorized.",
       "invalidEmail": "Enter a valid email address.",
@@ -144,6 +153,10 @@
       "saveFailed": "Could not save. Please try again.",
       "deleteFailed": "Could not delete. Please try again.",
       "systemSkillProtected": "System default skills are protected and cannot be modified.",
+      "uploadFailed": "Upload failed. Please try again.",
+      "imageInvalidType": "Only JPG, PNG, or WebP are allowed.",
+      "imageTooLarge": "Image must be 5MB or smaller.",
+      "imageEmpty": "Please select a file.",
       "idTaken": "An item with this ID already exists.",
       "idInvalid": "ID may only contain lowercase letters, numbers, and hyphens.",
       "slugInvalid": "Slug may only contain lowercase letters, numbers, and hyphens.",
@@ -271,6 +284,9 @@
       "newItem": "New project",
       "deleteConfirm": "Delete project ‘{title}’? Issues and skill links will also be removed.",
       "empty": "No projects yet.",
+      "dragHandle": "Reorder (drag)",
+      "pinnedGroup": "Pinned",
+      "unpinnedGroup": "Other",
       "sections": {
         "basic": "Basic info",
         "status": "Status",

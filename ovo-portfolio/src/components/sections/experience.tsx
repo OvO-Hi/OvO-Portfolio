@@ -13,7 +13,7 @@ export async function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-title"
-      className="container-prose scroll-mt-24 py-16 md:py-24"
+      className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="experience-title" eyebrow="05" title={t('title')} />
       <ol className="relative space-y-6 border-l border-border pl-6">

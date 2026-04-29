@@ -9,6 +9,7 @@ import {
   InputField,
   RadioGroupField,
 } from '@/components/admin/form-field';
+import { ImageUpload } from '@/components/admin/image-upload';
 import { LangTabs } from '@/components/admin/lang-tabs';
 import { MarkdownEditor } from '@/components/admin/markdown-editor';
 import { MultiSelect, type MultiSelectOption } from '@/components/admin/multi-select';
@@ -213,14 +214,26 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
           defaultValue={initial?.githubUrl}
           error={errorFor('githubUrl')}
         />
-        <InputField
-          label={t('projects.fields.thumbnailUrl')}
-          name="thumbnailUrl"
-          type="url"
-          defaultValue={initial?.thumbnailUrl}
-          hint={t('projects.hints.thumbnail')}
-          error={errorFor('thumbnailUrl')}
-        />
+        <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
+          <label className="pt-2 text-body font-medium text-foreground md:text-right">
+            {t('projects.fields.thumbnailUrl')}
+          </label>
+          <div className="space-y-1.5">
+            <ImageUpload
+              name="thumbnailUrl"
+              defaultValue={initial?.thumbnailUrl}
+              prefix={initial?.slug ? `project-thumb/${initial.slug}` : 'project-thumb'}
+              shape="video"
+              ariaLabel={t('projects.fields.thumbnailUrl')}
+            />
+            {errorFor('thumbnailUrl') ? (
+              <p role="alert" className="inline-flex items-center gap-1 text-caption text-accent">
+                <span aria-hidden>⚠</span>
+                <span>{errorFor('thumbnailUrl')}</span>
+              </p>
+            ) : null}
+          </div>
+        </div>
       </Section>
 
       {/* Section: skills */}

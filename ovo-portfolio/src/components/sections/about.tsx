@@ -12,7 +12,7 @@ export async function About() {
     <section
       id="about"
       aria-labelledby="about-title"
-      className="container-prose scroll-mt-24 py-16 md:py-24"
+      className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="about-title" eyebrow="01" title={t('title')} />
       <div className="max-w-[68ch] space-y-4 text-body text-foreground-muted">

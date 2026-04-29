@@ -11,7 +11,7 @@ export async function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="container-prose scroll-mt-24 py-16 md:py-24"
+      className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="projects-title" eyebrow="06" title={t('title')} />
       <ProjectsClient projects={projects} />

@@ -60,7 +60,7 @@ export async function Skills() {
     <section
       id="skills"
       aria-labelledby="skills-title"
-      className="container-prose scroll-mt-24 py-16 md:py-24"
+      className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="skills-title" eyebrow="03" title={t('title')} />
       <div className="space-y-6">

@@ -13,7 +13,7 @@ export async function Certifications() {
     <section
       id="certifications"
       aria-labelledby="certifications-title"
-      className="container-prose scroll-mt-24 py-16 md:py-24"
+      className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="certifications-title" eyebrow="04" title={t('title')} />
       <ul className="grid gap-3 md:grid-cols-2">

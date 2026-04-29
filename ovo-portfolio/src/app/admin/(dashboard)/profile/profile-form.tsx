@@ -3,6 +3,7 @@
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { InputField } from '@/components/admin/form-field';
+import { ImageUpload } from '@/components/admin/image-upload';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
 import { updateProfile } from './actions';
@@ -84,14 +85,29 @@ export function ProfileForm({ initial }: ProfileFormProps) {
         hint={t('profile.hints.github')}
         error={errorFor('github')}
       />
-      <InputField
-        label={t('profile.fields.profileImage')}
-        name="profileImage"
-        type="url"
-        defaultValue={initial.profileImage}
-        hint={t('profile.hints.profileImage')}
-        error={errorFor('profileImage')}
-      />
+      <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
+        <label className="pt-2 text-body font-medium text-foreground md:text-right">
+          {t('profile.fields.profileImage')}
+        </label>
+        <div className="space-y-1.5">
+          <ImageUpload
+            name="profileImage"
+            defaultValue={initial.profileImage}
+            prefix="profile"
+            shape="circle"
+            ariaLabel={t('profile.fields.profileImage')}
+          />
+          <p className="text-caption text-foreground-subtle">
+            {t('profile.hints.profileImage')}
+          </p>
+          {errorFor('profileImage') ? (
+            <p role="alert" className="inline-flex items-center gap-1 text-caption text-accent">
+              <span aria-hidden>⚠</span>
+              <span>{errorFor('profileImage')}</span>
+            </p>
+          ) : null}
+        </div>
+      </div>
 
       <div className="flex justify-end pt-2">
         <SaveButton saved={state.status === 'success'} />

@@ -325,3 +325,20 @@ export async function deleteProject(id: string): Promise<void> {
   }
   revalidatePath('/', 'layout');
 }
+
+export async function reorderProjects(
+  updates: Array<{ id: string; order: number }>
+): Promise<void> {
+  if (!(await isAdmin())) return;
+  if (updates.length === 0) return;
+  try {
+    await prisma.$transaction(
+      updates.map((u) =>
+        prisma.project.update({ where: { id: u.id }, data: { order: u.order } })
+      )
+    );
+  } catch {
+    // swallow
+  }
+  revalidatePath('/', 'layout');
+}

@@ -14,7 +14,7 @@ export async function Education() {
     <section
       id="education"
       aria-labelledby="education-title"
-      className="container-prose scroll-mt-24 py-16 md:py-24"
+      className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="education-title" eyebrow="02" title={t('title')} />
       <ul className="space-y-4">
