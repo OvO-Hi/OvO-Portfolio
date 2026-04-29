@@ -63,7 +63,12 @@ export async function getExperiencesForAdmin(): Promise<AdminExperience[]> {
 
 export async function getSkillsForAdmin(): Promise<AdminSkill[]> {
   const rows = await prisma.skill.findMany({
-    orderBy: [{ category: 'asc' }, { order: 'asc' }, { name: 'asc' }],
+    orderBy: [
+      { isSystem: 'desc' },
+      { category: 'asc' },
+      { order: 'asc' },
+      { name: 'asc' },
+    ],
     include: { _count: { select: { projects: true } } },
   });
   return rows.map((r) => ({
@@ -71,6 +76,7 @@ export async function getSkillsForAdmin(): Promise<AdminSkill[]> {
     name: r.name,
     category: r.category,
     iconKey: r.iconKey ?? undefined,
+    isSystem: r.isSystem,
     usageCount: r._count.projects,
   }));
 }

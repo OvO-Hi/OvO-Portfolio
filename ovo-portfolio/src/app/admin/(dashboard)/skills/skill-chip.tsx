@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Pencil, X } from 'lucide-react';
+import { Lock, Pencil, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { SkillForm } from './skill-form';
 import { deleteSkill } from './actions';
 import type { AdminSkill } from '@/lib/admin-queries';
@@ -14,6 +15,7 @@ interface SkillChipProps {
 export function SkillChip({ skill }: SkillChipProps) {
   const [isEditing, setIsEditing] = useState(false);
   const t = useTranslations('admin');
+  const isLocked = Boolean(skill.isSystem);
 
   const handleDelete = () => {
     const confirmKey = skill.usageCount > 0 ? 'deleteUsedConfirm' : 'deleteConfirm';
@@ -25,7 +27,7 @@ export function SkillChip({ skill }: SkillChipProps) {
     void deleteSkill(skill.id);
   };
 
-  if (isEditing) {
+  if (isEditing && !isLocked) {
     return (
       <div className="rounded-sm border border-border-strong bg-background p-3 shadow-sm">
         <SkillForm
@@ -40,6 +42,22 @@ export function SkillChip({ skill }: SkillChipProps) {
           </p>
         ) : null}
       </div>
+    );
+  }
+
+  if (isLocked) {
+    return (
+      <span
+        title={t('skills.systemTooltip')}
+        aria-label={`${skill.name} — ${t('skills.systemBadge')}`}
+        className={cn(
+          'inline-flex items-center gap-1.5 rounded-sm border border-border bg-background-subtle py-1 pl-2 pr-2.5 text-caption text-foreground-subtle',
+          'cursor-default'
+        )}
+      >
+        <Lock className="h-3 w-3" aria-hidden />
+        <span>{skill.name}</span>
+      </span>
     );
   }
 

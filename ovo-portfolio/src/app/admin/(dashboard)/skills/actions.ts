@@ -94,6 +94,12 @@ export async function updateSkill(
 ): Promise<SkillActionState> {
   if (!(await isAdmin())) return { status: 'error', formError: 'unauthorized' };
 
+  const existing = await prisma.skill.findUnique({ where: { id } });
+  if (!existing) return { status: 'error', formError: 'saveFailed' };
+  if (existing.isSystem) {
+    return { status: 'error', formError: 'systemSkillProtected' };
+  }
+
   const get = (k: string) => (formData.get(k) ?? '').toString().trim();
   const name = get('name');
   const iconKey = get('iconKey');
@@ -118,6 +124,10 @@ export async function updateSkill(
 
 export async function deleteSkill(id: string): Promise<void> {
   if (!(await isAdmin())) return;
+
+  const existing = await prisma.skill.findUnique({ where: { id } });
+  if (!existing || existing.isSystem) return;
+
   try {
     await prisma.$transaction([
       prisma.projectSkill.deleteMany({ where: { skillId: id } }),
@@ -127,4 +137,31 @@ export async function deleteSkill(id: string): Promise<void> {
     // swallow — UI re-fetches
   }
   revalidatePath('/', 'layout');
+}
+
+export async function createSkillQuick(
+  name: string
+): Promise<{ id: string; name: string; category: SkillCategory } | null> {
+  if (!(await isAdmin())) return null;
+
+  const trimmed = name.trim();
+  if (!trimmed) return null;
+
+  let id = toKebab(trimmed);
+  if (!id) {
+    id = `skill-${Date.now().toString(36)}`;
+  }
+  if (!ID_RE.test(id)) return null;
+
+  try {
+    const skill = await prisma.skill.upsert({
+      where: { id },
+      update: {},
+      create: { id, name: trimmed, category: 'tool', order: 999 },
+    });
+    revalidatePath('/', 'layout');
+    return { id: skill.id, name: skill.name, category: skill.category };
+  } catch {
+    return null;
+  }
 }

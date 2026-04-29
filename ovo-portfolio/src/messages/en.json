@@ -117,6 +117,24 @@
       "yes": "Yes",
       "no": "No"
     },
+    "markdown": {
+      "tabEdit": "Edit",
+      "tabPreview": "Preview",
+      "previewEmpty": "Type something to see a preview here.",
+      "tools": {
+        "bold": "Bold (Cmd/Ctrl+B)",
+        "italic": "Italic (Cmd/Ctrl+I)",
+        "link": "Link",
+        "code": "Inline code",
+        "codeBlock": "Code block",
+        "heading": "Heading",
+        "list": "List"
+      }
+    },
+    "multiSelect": {
+      "createOption": "Create ‘{name}’",
+      "createHint": "Defaults to category ‘Tool’; change later in /admin/skills."
+    },
     "errors": {
       "unauthorized": "Not authorized.",
       "invalidEmail": "Enter a valid email address.",
@@ -125,6 +143,7 @@
       "required": "Required.",
       "saveFailed": "Could not save. Please try again.",
       "deleteFailed": "Could not delete. Please try again.",
+      "systemSkillProtected": "System default skills are protected and cannot be modified.",
       "idTaken": "An item with this ID already exists.",
       "idInvalid": "ID may only contain lowercase letters, numbers, and hyphens.",
       "slugInvalid": "Slug may only contain lowercase letters, numbers, and hyphens.",
@@ -230,6 +249,10 @@
       "deleteConfirm": "Delete the ‘{name}’ skill?",
       "deleteUsedConfirm": "‘{name}’ is used by {count} project(s). Deleting will also remove its links from those projects. Delete anyway?",
       "usageCount": "Used by {count} project(s)",
+      "systemBadge": "Default",
+      "systemTooltip": "System default skills cannot be modified or deleted.",
+      "quickAdd": "Create ‘{name}’",
+      "quickAddHint": "Defaults to category ‘Tool’.",
       "fields": {
         "name": "Name",
         "id": "ID",

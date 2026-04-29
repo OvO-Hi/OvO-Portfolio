@@ -82,7 +82,7 @@ async function main() {
   }
   console.log(`  ✓ educations (${educations.length})`);
 
-  // Skills
+  // Skills (시드된 스킬은 모두 시스템 스킬)
   for (let i = 0; i < skillsSeed.length; i++) {
     const s = skillsSeed[i];
     await prisma.skill.create({
@@ -91,11 +91,12 @@ async function main() {
         name: s.name,
         category: s.category as SkillCategory,
         iconKey: s.iconKey,
+        isSystem: true,
         order: i,
       },
     });
   }
-  console.log(`  ✓ skills (${skillsSeed.length})`);
+  console.log(`  ✓ skills (${skillsSeed.length}, isSystem=true)`);
 
   // Certifications
   for (let i = 0; i < certifications.length; i++) {

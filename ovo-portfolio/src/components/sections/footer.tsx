@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Mail } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/icons';
+import { SecretTrigger } from '@/components/secret-trigger';
 import { profile } from '@/data/dummy';
 
 export function Footer() {
@@ -10,8 +11,7 @@ export function Footer() {
     <footer className="border-t border-border mt-16 md:mt-24">
       <div className="container-prose flex flex-col items-start justify-between gap-4 py-10 md:flex-row md:items-center">
         <p className="font-mono text-caption text-foreground-subtle">
-          {/* Admin entry point hidden for phase 4 */}
-          <span aria-hidden>{t('copyright')}</span>
+          <SecretTrigger>{t('copyright')}</SecretTrigger>
         </p>
         <ul className="flex items-center gap-4 text-caption text-foreground-muted">
           <li>

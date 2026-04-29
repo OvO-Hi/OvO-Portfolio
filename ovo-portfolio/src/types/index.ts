@@ -36,6 +36,7 @@ export interface Skill {
   name: string;
   category: SkillCategory;
   iconKey?: string;
+  isSystem?: boolean;
 }
 
 export interface ProjectIssue {

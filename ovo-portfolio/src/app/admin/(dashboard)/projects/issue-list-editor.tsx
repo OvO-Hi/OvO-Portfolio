@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Plus, X } from 'lucide-react';
+import { MarkdownEditor } from '@/components/admin/markdown-editor';
 import { cn } from '@/lib/utils';
 import type { IssueDraft } from './types';
 
@@ -32,8 +33,6 @@ const inputClass = cn(
   'transition-colors duration-150 hover:border-border-strong',
   'focus-visible:outline-none focus-visible:border-border-strong focus-visible:ring-2 focus-visible:ring-[var(--border-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]'
 );
-
-const textareaClass = cn(inputClass, 'resize-y leading-[1.6]');
 
 export function IssueListEditor({ name, initial }: IssueListEditorProps) {
   const idRef = useRef(0);
@@ -94,7 +93,7 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                 </button>
               </header>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-2">
                 <Field label={t('titleKo')}>
                   <input
                     type="text"
@@ -112,51 +111,51 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                   />
                 </Field>
                 <Field label={t('problemKo')}>
-                  <textarea
-                    rows={3}
+                  <MarkdownEditor
                     value={item.data.problemKo}
-                    onChange={(e) => update(item.id, 'problemKo', e.target.value)}
-                    className={textareaClass}
+                    onChange={(v) => update(item.id, 'problemKo', v)}
+                    rows={4}
+                    ariaLabel={t('problemKo')}
                   />
                 </Field>
                 <Field label={t('problemEn')}>
-                  <textarea
-                    rows={3}
+                  <MarkdownEditor
                     value={item.data.problemEn}
-                    onChange={(e) => update(item.id, 'problemEn', e.target.value)}
-                    className={textareaClass}
+                    onChange={(v) => update(item.id, 'problemEn', v)}
+                    rows={4}
+                    ariaLabel={t('problemEn')}
                   />
                 </Field>
                 <Field label={t('solutionKo')}>
-                  <textarea
-                    rows={3}
+                  <MarkdownEditor
                     value={item.data.solutionKo}
-                    onChange={(e) => update(item.id, 'solutionKo', e.target.value)}
-                    className={textareaClass}
+                    onChange={(v) => update(item.id, 'solutionKo', v)}
+                    rows={4}
+                    ariaLabel={t('solutionKo')}
                   />
                 </Field>
                 <Field label={t('solutionEn')}>
-                  <textarea
-                    rows={3}
+                  <MarkdownEditor
                     value={item.data.solutionEn}
-                    onChange={(e) => update(item.id, 'solutionEn', e.target.value)}
-                    className={textareaClass}
+                    onChange={(v) => update(item.id, 'solutionEn', v)}
+                    rows={4}
+                    ariaLabel={t('solutionEn')}
                   />
                 </Field>
                 <Field label={t('outcomeKo')}>
-                  <textarea
-                    rows={2}
+                  <MarkdownEditor
                     value={item.data.outcomeKo}
-                    onChange={(e) => update(item.id, 'outcomeKo', e.target.value)}
-                    className={textareaClass}
+                    onChange={(v) => update(item.id, 'outcomeKo', v)}
+                    rows={3}
+                    ariaLabel={t('outcomeKo')}
                   />
                 </Field>
                 <Field label={t('outcomeEn')}>
-                  <textarea
-                    rows={2}
+                  <MarkdownEditor
                     value={item.data.outcomeEn}
-                    onChange={(e) => update(item.id, 'outcomeEn', e.target.value)}
-                    className={textareaClass}
+                    onChange={(v) => update(item.id, 'outcomeEn', v)}
+                    rows={3}
+                    ariaLabel={t('outcomeEn')}
                   />
                 </Field>
               </div>

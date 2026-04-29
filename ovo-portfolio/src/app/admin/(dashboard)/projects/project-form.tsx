@@ -8,14 +8,15 @@ import {
   DateMonthField,
   InputField,
   RadioGroupField,
-  TextareaField,
 } from '@/components/admin/form-field';
 import { LangTabs } from '@/components/admin/lang-tabs';
+import { MarkdownEditor } from '@/components/admin/markdown-editor';
 import { MultiSelect, type MultiSelectOption } from '@/components/admin/multi-select';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
 import { IssueListEditor } from './issue-list-editor';
 import { createProject, updateProject } from './actions';
+import { createSkillQuick } from '../skills/actions';
 import {
   projectInitialState,
   type IssueDraft,
@@ -230,6 +231,16 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
           defaultValue={initial?.skillIds}
           searchPlaceholder={t('projects.skillSearch')}
           emptyMessage={t('projects.skillEmpty')}
+          onCreate={async (skillName) => {
+            const created = await createSkillQuick(skillName);
+            if (!created) return null;
+            return {
+              value: created.id,
+              label: created.name,
+              group: tSkillCategory(created.category),
+            };
+          }}
+          createHint={t('multiSelect.createHint')}
         />
       </Section>
 
@@ -239,23 +250,19 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
           koLabel="한국어"
           enLabel="English"
           koContent={
-            <TextareaField
-              label={t('projects.fields.descriptionKo')}
+            <DescriptionPane
+              ariaLabel={t('projects.fields.descriptionKo')}
               name="descriptionKo"
               defaultValue={initial?.description.ko}
-              rows={10}
               error={errorFor('descriptionKo')}
-              required
             />
           }
           enContent={
-            <TextareaField
-              label={t('projects.fields.descriptionEn')}
+            <DescriptionPane
+              ariaLabel={t('projects.fields.descriptionEn')}
               name="descriptionEn"
               defaultValue={initial?.description.en}
-              rows={10}
               error={errorFor('descriptionEn')}
-              required
             />
           }
         />
@@ -288,5 +295,32 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <h3 className="border-b border-border pb-2 text-h3 text-foreground">{title}</h3>
       {children}
     </section>
+  );
+}
+
+interface DescriptionPaneProps {
+  name: string;
+  ariaLabel: string;
+  defaultValue?: string;
+  error?: string;
+}
+
+function DescriptionPane({ name, ariaLabel, defaultValue, error }: DescriptionPaneProps) {
+  return (
+    <div className="space-y-1.5">
+      <MarkdownEditor
+        name={name}
+        defaultValue={defaultValue}
+        rows={12}
+        ariaLabel={ariaLabel}
+        required
+      />
+      {error ? (
+        <p role="alert" className="inline-flex items-center gap-1 text-caption text-accent">
+          <span aria-hidden>⚠</span>
+          <span>{error}</span>
+        </p>
+      ) : null}
+    </div>
   );
 }
