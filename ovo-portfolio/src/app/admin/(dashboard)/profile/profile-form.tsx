@@ -35,48 +35,50 @@ export function ProfileForm({ initial }: ProfileFormProps) {
         <StatusMessage variant="error">{t(`errors.${state.formError}`)}</StatusMessage>
       ) : null}
 
-      <InputField
-        label={t('profile.fields.nameKo')}
-        name="nameKo"
-        defaultValue={initial.name.ko}
-        error={errorFor('nameKo')}
-        required
-      />
-      <InputField
-        label={t('profile.fields.nameEn')}
-        name="nameEn"
-        defaultValue={initial.name.en}
-        error={errorFor('nameEn')}
-        required
-      />
-      <InputField
-        label={t('profile.fields.taglineKo')}
-        name="taglineKo"
-        defaultValue={initial.tagline.ko}
-        error={errorFor('taglineKo')}
-        required
-      />
-      <InputField
-        label={t('profile.fields.taglineEn')}
-        name="taglineEn"
-        defaultValue={initial.tagline.en}
-        error={errorFor('taglineEn')}
-        required
-      />
-      <InputField
-        label={t('profile.fields.email')}
-        name="email"
-        type="email"
-        defaultValue={initial.email}
-        error={errorFor('email')}
-        required
-      />
-      <InputField
-        label={t('profile.fields.phone')}
-        name="phone"
-        defaultValue={initial.phone}
-        error={errorFor('phone')}
-      />
+      <div className="grid gap-4 md:grid-cols-2">
+        <InputField
+          label={t('profile.fields.nameKo')}
+          name="nameKo"
+          defaultValue={initial.name.ko}
+          error={errorFor('nameKo')}
+          required
+        />
+        <InputField
+          label={t('profile.fields.nameEn')}
+          name="nameEn"
+          defaultValue={initial.name.en}
+          error={errorFor('nameEn')}
+          required
+        />
+        <InputField
+          label={t('profile.fields.taglineKo')}
+          name="taglineKo"
+          defaultValue={initial.tagline.ko}
+          error={errorFor('taglineKo')}
+          required
+        />
+        <InputField
+          label={t('profile.fields.taglineEn')}
+          name="taglineEn"
+          defaultValue={initial.tagline.en}
+          error={errorFor('taglineEn')}
+          required
+        />
+        <InputField
+          label={t('profile.fields.email')}
+          name="email"
+          type="email"
+          defaultValue={initial.email}
+          error={errorFor('email')}
+          required
+        />
+        <InputField
+          label={t('profile.fields.phone')}
+          name="phone"
+          defaultValue={initial.phone}
+          error={errorFor('phone')}
+        />
+      </div>
       <InputField
         label={t('profile.fields.github')}
         name="github"
@@ -85,28 +87,26 @@ export function ProfileForm({ initial }: ProfileFormProps) {
         hint={t('profile.hints.github')}
         error={errorFor('github')}
       />
-      <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
-        <label className="pt-2 text-body font-medium text-foreground md:text-right">
+      <div className="space-y-1.5">
+        <span className="block text-caption font-medium text-foreground">
           {t('profile.fields.profileImage')}
-        </label>
-        <div className="space-y-1.5">
-          <ImageUpload
-            name="profileImage"
-            defaultValue={initial.profileImage}
-            prefix="profile"
-            shape="circle"
-            ariaLabel={t('profile.fields.profileImage')}
-          />
-          <p className="text-caption text-foreground-subtle">
-            {t('profile.hints.profileImage')}
+        </span>
+        <ImageUpload
+          name="profileImage"
+          defaultValue={initial.profileImage}
+          prefix="profile"
+          shape="circle"
+          ariaLabel={t('profile.fields.profileImage')}
+        />
+        <p className="text-caption text-foreground-subtle">
+          {t('profile.hints.profileImage')}
+        </p>
+        {errorFor('profileImage') ? (
+          <p role="alert" className="inline-flex items-center gap-1 text-caption text-accent">
+            <span aria-hidden>⚠</span>
+            <span>{errorFor('profileImage')}</span>
           </p>
-          {errorFor('profileImage') ? (
-            <p role="alert" className="inline-flex items-center gap-1 text-caption text-accent">
-              <span aria-hidden>⚠</span>
-              <span>{errorFor('profileImage')}</span>
-            </p>
-          ) : null}
-        </div>
+        ) : null}
       </div>
 
       <div className="flex justify-end pt-2">

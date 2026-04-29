@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Plus, X } from 'lucide-react';
+import { LangTabs } from '@/components/admin/lang-tabs';
 import { MarkdownEditor } from '@/components/admin/markdown-editor';
 import { cn } from '@/lib/utils';
 import type { IssueDraft } from './types';
@@ -93,72 +94,82 @@ export function IssueListEditor({ name, initial }: IssueListEditorProps) {
                 </button>
               </header>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <Field label={t('titleKo')}>
-                  <input
-                    type="text"
-                    value={item.data.titleKo}
-                    onChange={(e) => update(item.id, 'titleKo', e.target.value)}
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label={t('titleEn')}>
-                  <input
-                    type="text"
-                    value={item.data.titleEn}
-                    onChange={(e) => update(item.id, 'titleEn', e.target.value)}
-                    className={inputClass}
-                  />
-                </Field>
-                <Field label={t('problemKo')}>
-                  <MarkdownEditor
-                    value={item.data.problemKo}
-                    onChange={(v) => update(item.id, 'problemKo', v)}
-                    rows={4}
-                    ariaLabel={t('problemKo')}
-                  />
-                </Field>
-                <Field label={t('problemEn')}>
-                  <MarkdownEditor
-                    value={item.data.problemEn}
-                    onChange={(v) => update(item.id, 'problemEn', v)}
-                    rows={4}
-                    ariaLabel={t('problemEn')}
-                  />
-                </Field>
-                <Field label={t('solutionKo')}>
-                  <MarkdownEditor
-                    value={item.data.solutionKo}
-                    onChange={(v) => update(item.id, 'solutionKo', v)}
-                    rows={4}
-                    ariaLabel={t('solutionKo')}
-                  />
-                </Field>
-                <Field label={t('solutionEn')}>
-                  <MarkdownEditor
-                    value={item.data.solutionEn}
-                    onChange={(v) => update(item.id, 'solutionEn', v)}
-                    rows={4}
-                    ariaLabel={t('solutionEn')}
-                  />
-                </Field>
-                <Field label={t('outcomeKo')}>
-                  <MarkdownEditor
-                    value={item.data.outcomeKo}
-                    onChange={(v) => update(item.id, 'outcomeKo', v)}
-                    rows={3}
-                    ariaLabel={t('outcomeKo')}
-                  />
-                </Field>
-                <Field label={t('outcomeEn')}>
-                  <MarkdownEditor
-                    value={item.data.outcomeEn}
-                    onChange={(v) => update(item.id, 'outcomeEn', v)}
-                    rows={3}
-                    ariaLabel={t('outcomeEn')}
-                  />
-                </Field>
-              </div>
+              <LangTabs
+                koLabel="한국어"
+                enLabel="English"
+                koContent={
+                  <div className="space-y-4">
+                    <Field label={t('titleKo')}>
+                      <input
+                        type="text"
+                        value={item.data.titleKo}
+                        onChange={(e) => update(item.id, 'titleKo', e.target.value)}
+                        className={inputClass}
+                      />
+                    </Field>
+                    <Field label={t('problemKo')}>
+                      <MarkdownEditor
+                        value={item.data.problemKo}
+                        onChange={(v) => update(item.id, 'problemKo', v)}
+                        rows={4}
+                        ariaLabel={t('problemKo')}
+                      />
+                    </Field>
+                    <Field label={t('solutionKo')}>
+                      <MarkdownEditor
+                        value={item.data.solutionKo}
+                        onChange={(v) => update(item.id, 'solutionKo', v)}
+                        rows={4}
+                        ariaLabel={t('solutionKo')}
+                      />
+                    </Field>
+                    <Field label={t('outcomeKo')}>
+                      <MarkdownEditor
+                        value={item.data.outcomeKo}
+                        onChange={(v) => update(item.id, 'outcomeKo', v)}
+                        rows={3}
+                        ariaLabel={t('outcomeKo')}
+                      />
+                    </Field>
+                  </div>
+                }
+                enContent={
+                  <div className="space-y-4">
+                    <Field label={t('titleEn')}>
+                      <input
+                        type="text"
+                        value={item.data.titleEn}
+                        onChange={(e) => update(item.id, 'titleEn', e.target.value)}
+                        className={inputClass}
+                      />
+                    </Field>
+                    <Field label={t('problemEn')}>
+                      <MarkdownEditor
+                        value={item.data.problemEn}
+                        onChange={(v) => update(item.id, 'problemEn', v)}
+                        rows={4}
+                        ariaLabel={t('problemEn')}
+                      />
+                    </Field>
+                    <Field label={t('solutionEn')}>
+                      <MarkdownEditor
+                        value={item.data.solutionEn}
+                        onChange={(v) => update(item.id, 'solutionEn', v)}
+                        rows={4}
+                        ariaLabel={t('solutionEn')}
+                      />
+                    </Field>
+                    <Field label={t('outcomeEn')}>
+                      <MarkdownEditor
+                        value={item.data.outcomeEn}
+                        onChange={(v) => update(item.id, 'outcomeEn', v)}
+                        rows={3}
+                        ariaLabel={t('outcomeEn')}
+                      />
+                    </Field>
+                  </div>
+                }
+              />
             </li>
           ))}
         </ul>

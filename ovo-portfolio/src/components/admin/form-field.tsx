@@ -19,10 +19,10 @@ function FieldShell({ label, htmlFor, hint, error, required, children }: FieldSh
   const errorId = error ? `${htmlFor}-error` : undefined;
 
   return (
-    <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
+    <div className="space-y-1.5">
       <label
         htmlFor={htmlFor}
-        className="pt-2 text-body font-medium text-foreground md:text-right"
+        className="block text-caption font-medium text-foreground"
       >
         {label}
         {required ? (
@@ -31,24 +31,22 @@ function FieldShell({ label, htmlFor, hint, error, required, children }: FieldSh
           </span>
         ) : null}
       </label>
-      <div className="space-y-1.5">
-        {children}
-        {hint && !error ? (
-          <p id={hintId} className="text-caption text-foreground-subtle">
-            {hint}
-          </p>
-        ) : null}
-        {error ? (
-          <p
-            id={errorId}
-            role="alert"
-            className="inline-flex items-center gap-1 text-caption text-accent"
-          >
-            <span aria-hidden>⚠</span>
-            <span>{error}</span>
-          </p>
-        ) : null}
-      </div>
+      {children}
+      {hint && !error ? (
+        <p id={hintId} className="text-caption text-foreground-subtle">
+          {hint}
+        </p>
+      ) : null}
+      {error ? (
+        <p
+          id={errorId}
+          role="alert"
+          className="inline-flex items-center gap-1 text-caption text-accent"
+        >
+          <span aria-hidden>⚠</span>
+          <span>{error}</span>
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -232,26 +230,23 @@ interface CheckboxFieldProps {
 export function CheckboxField({ label, name, defaultChecked, hint }: CheckboxFieldProps) {
   const id = `field-${name}`;
   return (
-    <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
-      <span aria-hidden className="hidden md:block" />
-      <div className="space-y-1.5">
-        <label
-          htmlFor={id}
-          className="inline-flex cursor-pointer items-center gap-2 text-body text-foreground"
-        >
-          <input
-            type="checkbox"
-            id={id}
-            name={name}
-            defaultChecked={defaultChecked}
-            className="h-4 w-4 rounded-sm border-border accent-accent"
-          />
-          {label}
-        </label>
-        {hint ? (
-          <p className="text-caption text-foreground-subtle">{hint}</p>
-        ) : null}
-      </div>
+    <div className="space-y-1.5">
+      <label
+        htmlFor={id}
+        className="inline-flex cursor-pointer items-center gap-2 text-body text-foreground"
+      >
+        <input
+          type="checkbox"
+          id={id}
+          name={name}
+          defaultChecked={defaultChecked}
+          className="h-4 w-4 rounded-sm border-border accent-accent"
+        />
+        {label}
+      </label>
+      {hint ? (
+        <p className="text-caption text-foreground-subtle">{hint}</p>
+      ) : null}
     </div>
   );
 }
