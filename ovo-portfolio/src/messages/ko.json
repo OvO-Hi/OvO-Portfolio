@@ -124,7 +124,12 @@
       "invalidDate": "YYYY-MM 형식으로 입력해주세요.",
       "required": "필수 항목입니다.",
       "saveFailed": "저장에 실패했습니다. 다시 시도해주세요.",
-      "deleteFailed": "삭제에 실패했습니다. 다시 시도해주세요."
+      "deleteFailed": "삭제에 실패했습니다. 다시 시도해주세요.",
+      "idTaken": "이미 같은 ID가 존재합니다.",
+      "idInvalid": "ID는 영문 소문자, 숫자, 하이픈만 사용 가능합니다.",
+      "slugInvalid": "slug는 영문 소문자, 숫자, 하이픈만 사용 가능합니다.",
+      "slugTaken": "이미 같은 slug의 프로젝트가 존재합니다.",
+      "rangeInvalid": "1에서 100 사이의 숫자를 입력해주세요."
     },
     "home": {
       "title": "관리자 대시보드",
@@ -214,6 +219,87 @@
         "endDate": "종료",
         "descriptionKo": "한 줄 설명 (한국어)",
         "descriptionEn": "한 줄 설명 (영어)"
+      }
+    },
+    "skills": {
+      "title": "기술 스택 관리",
+      "subtitle": "메인 사이트의 Skills 섹션 + 프로젝트에 연결되는 스킬 풀입니다.",
+      "searchPlaceholder": "스킬 검색...",
+      "addNew": "추가",
+      "emptyCategory": "이 카테고리에 스킬이 없습니다.",
+      "deleteConfirm": "‘{name}’ 스킬을 삭제할까요?",
+      "deleteUsedConfirm": "‘{name}’ 스킬이 {count}개 프로젝트에서 사용 중입니다. 삭제 시 프로젝트의 스킬 연결도 함께 끊깁니다. 정말 삭제할까요?",
+      "usageCount": "{count}개 프로젝트에서 사용 중",
+      "fields": {
+        "name": "이름 (표시명)",
+        "id": "ID",
+        "category": "카테고리",
+        "iconKey": "아이콘 키"
+      },
+      "hints": {
+        "id": "비워두면 이름에서 자동 생성됩니다 (kebab-case)",
+        "iconKey": "선택 — devicon 또는 simple-icons에서 사용할 키"
+      }
+    },
+    "projects": {
+      "title": "프로젝트 관리",
+      "subtitle": "Pin → order → 시작일 순으로 정렬됩니다.",
+      "addNew": "프로젝트 추가",
+      "newItem": "새 프로젝트",
+      "deleteConfirm": "‘{title}’ 프로젝트를 삭제할까요? 이슈와 스킬 연결도 함께 삭제됩니다.",
+      "empty": "등록된 프로젝트가 없습니다.",
+      "sections": {
+        "basic": "기본 정보",
+        "status": "상태",
+        "links": "링크",
+        "description": "상세 설명",
+        "skills": "사용 스킬",
+        "issues": "이슈 & 해결"
+      },
+      "fields": {
+        "slug": "slug",
+        "titleKo": "제목 (한국어)",
+        "titleEn": "제목 (영어)",
+        "oneLinerKo": "한 줄 설명 (한국어)",
+        "oneLinerEn": "한 줄 설명 (영어)",
+        "startDate": "시작",
+        "endDate": "종료",
+        "dateGranularity": "날짜 단위",
+        "granularityMonth": "월 단위 (YYYY-MM)",
+        "granularityDay": "일 단위 (YYYY-MM-DD)",
+        "roleKo": "역할 (한국어)",
+        "roleEn": "역할 (영어)",
+        "teamSize": "팀 규모",
+        "contribution": "기여도 (%)",
+        "pinned": "Pin (대표작으로 우선 노출)",
+        "visible": "메인 사이트에 공개",
+        "order": "정렬 순서",
+        "demoUrl": "데모 URL",
+        "githubUrl": "GitHub URL",
+        "thumbnailUrl": "썸네일 URL",
+        "descriptionKo": "상세 설명 (한국어, 마크다운)",
+        "descriptionEn": "상세 설명 (영어, 마크다운)"
+      },
+      "hints": {
+        "slug": "URL에 사용됩니다. 비워두면 한글 제목에서 자동 생성.",
+        "order": "낮을수록 먼저 표시. 같은 pin 그룹 안에서 적용.",
+        "thumbnail": "이미지 업로드는 5단계에서 — 일단 URL 직접 입력."
+      },
+      "skillSearch": "스킬 검색...",
+      "skillEmpty": "선택된 스킬이 없습니다.",
+      "issues": {
+        "addNew": "이슈 추가",
+        "remove": "이슈 제거",
+        "empty": "이슈가 없습니다. 자유롭게 추가하세요.",
+        "labelN": "이슈 #{n}",
+        "titleKo": "제목 (한국어)",
+        "titleEn": "제목 (영어)",
+        "problemKo": "문제 (한국어)",
+        "problemEn": "문제 (영어)",
+        "solutionKo": "해결 (한국어)",
+        "solutionEn": "해결 (영어)",
+        "outcomeKo": "결과 (한국어, 선택)",
+        "outcomeEn": "결과 (영어, 선택)"
       }
     }
   }

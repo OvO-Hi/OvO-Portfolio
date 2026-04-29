@@ -124,7 +124,12 @@
       "invalidDate": "Use YYYY-MM format.",
       "required": "Required.",
       "saveFailed": "Could not save. Please try again.",
-      "deleteFailed": "Could not delete. Please try again."
+      "deleteFailed": "Could not delete. Please try again.",
+      "idTaken": "An item with this ID already exists.",
+      "idInvalid": "ID may only contain lowercase letters, numbers, and hyphens.",
+      "slugInvalid": "Slug may only contain lowercase letters, numbers, and hyphens.",
+      "slugTaken": "A project with this slug already exists.",
+      "rangeInvalid": "Enter a number between 1 and 100."
     },
     "home": {
       "title": "Admin dashboard",
@@ -214,6 +219,87 @@
         "endDate": "End",
         "descriptionKo": "Description (Korean)",
         "descriptionEn": "Description (English)"
+      }
+    },
+    "skills": {
+      "title": "Manage skills",
+      "subtitle": "The shared pool used in the Skills section and on each project.",
+      "searchPlaceholder": "Search skills…",
+      "addNew": "Add",
+      "emptyCategory": "No skills in this category.",
+      "deleteConfirm": "Delete the ‘{name}’ skill?",
+      "deleteUsedConfirm": "‘{name}’ is used by {count} project(s). Deleting will also remove its links from those projects. Delete anyway?",
+      "usageCount": "Used by {count} project(s)",
+      "fields": {
+        "name": "Name",
+        "id": "ID",
+        "category": "Category",
+        "iconKey": "Icon key"
+      },
+      "hints": {
+        "id": "Auto-generated from name if blank (kebab-case).",
+        "iconKey": "Optional — devicon or simple-icons key."
+      }
+    },
+    "projects": {
+      "title": "Manage projects",
+      "subtitle": "Sorted by Pin → order → start date.",
+      "addNew": "Add project",
+      "newItem": "New project",
+      "deleteConfirm": "Delete project ‘{title}’? Issues and skill links will also be removed.",
+      "empty": "No projects yet.",
+      "sections": {
+        "basic": "Basic info",
+        "status": "Status",
+        "links": "Links",
+        "description": "Description",
+        "skills": "Skills used",
+        "issues": "Issues & solutions"
+      },
+      "fields": {
+        "slug": "slug",
+        "titleKo": "Title (Korean)",
+        "titleEn": "Title (English)",
+        "oneLinerKo": "One-liner (Korean)",
+        "oneLinerEn": "One-liner (English)",
+        "startDate": "Start",
+        "endDate": "End",
+        "dateGranularity": "Date granularity",
+        "granularityMonth": "Month (YYYY-MM)",
+        "granularityDay": "Day (YYYY-MM-DD)",
+        "roleKo": "Role (Korean)",
+        "roleEn": "Role (English)",
+        "teamSize": "Team size",
+        "contribution": "Contribution (%)",
+        "pinned": "Pin (show first as a featured project)",
+        "visible": "Visible on public site",
+        "order": "Sort order",
+        "demoUrl": "Demo URL",
+        "githubUrl": "GitHub URL",
+        "thumbnailUrl": "Thumbnail URL",
+        "descriptionKo": "Description (Korean, markdown)",
+        "descriptionEn": "Description (English, markdown)"
+      },
+      "hints": {
+        "slug": "Used in URLs. Auto-generated from the English title if blank.",
+        "order": "Lower = earlier. Applies within the same pin group.",
+        "thumbnail": "Image upload comes in phase 5 — paste a URL for now."
+      },
+      "skillSearch": "Search skills…",
+      "skillEmpty": "No skills selected.",
+      "issues": {
+        "addNew": "Add issue",
+        "remove": "Remove",
+        "empty": "No issues yet. Add one if you want.",
+        "labelN": "Issue #{n}",
+        "titleKo": "Title (Korean)",
+        "titleEn": "Title (English)",
+        "problemKo": "Problem (Korean)",
+        "problemEn": "Problem (English)",
+        "solutionKo": "Solution (Korean)",
+        "solutionEn": "Solution (English)",
+        "outcomeKo": "Outcome (Korean, optional)",
+        "outcomeEn": "Outcome (English, optional)"
       }
     }
   }

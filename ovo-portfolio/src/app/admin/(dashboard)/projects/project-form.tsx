@@ -1,0 +1,292 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useFormState } from 'react-dom';
+import { useTranslations } from 'next-intl';
+import {
+  CheckboxField,
+  DateMonthField,
+  InputField,
+  RadioGroupField,
+  TextareaField,
+} from '@/components/admin/form-field';
+import { LangTabs } from '@/components/admin/lang-tabs';
+import { MultiSelect, type MultiSelectOption } from '@/components/admin/multi-select';
+import { SaveButton } from '@/components/admin/save-button';
+import { StatusMessage } from '@/components/admin/status-message';
+import { IssueListEditor } from './issue-list-editor';
+import { createProject, updateProject } from './actions';
+import {
+  projectInitialState,
+  type IssueDraft,
+  type ProjectActionState,
+} from './types';
+import type { AdminSkill } from '@/lib/admin-queries';
+import type { Project } from '@/types';
+
+interface ProjectFormProps {
+  initial?: Project;
+  skills: AdminSkill[];
+  onSuccess?: () => void;
+  onCancel?: () => void;
+}
+
+export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFormProps) {
+  const t = useTranslations('admin');
+  const tSkillCategory = useTranslations('skills.category');
+
+  const action =
+    initial?.id !== undefined
+      ? updateProject.bind(null, initial.id)
+      : createProject;
+  const [state, formAction] = useFormState<ProjectActionState, FormData>(
+    action,
+    projectInitialState
+  );
+
+  useEffect(() => {
+    if (state.status === 'success') onSuccess?.();
+  }, [state.status, onSuccess]);
+
+  const errors = state.status === 'error' ? state.errors ?? {} : {};
+  const errorFor = (k: string) => (errors[k] ? t(`errors.${errors[k]}`) : undefined);
+
+  const skillOptions: MultiSelectOption[] = skills.map((s) => ({
+    value: s.id,
+    label: s.name,
+    group: tSkillCategory(s.category),
+  }));
+
+  const initialIssues: IssueDraft[] = (initial?.issues ?? []).map((i) => ({
+    titleKo: i.title.ko,
+    titleEn: i.title.en,
+    problemKo: i.problem.ko,
+    problemEn: i.problem.en,
+    solutionKo: i.solution.ko,
+    solutionEn: i.solution.en,
+    outcomeKo: i.outcome?.ko ?? '',
+    outcomeEn: i.outcome?.en ?? '',
+  }));
+
+  return (
+    <form action={formAction} className="space-y-10" noValidate>
+      {state.status === 'error' && state.formError ? (
+        <StatusMessage variant="error">{t(`errors.${state.formError}`)}</StatusMessage>
+      ) : null}
+
+      {/* Section: basic */}
+      <Section title={t('projects.sections.basic')}>
+        <InputField
+          label={t('projects.fields.slug')}
+          name="slug"
+          defaultValue={initial?.slug}
+          hint={t('projects.hints.slug')}
+          error={errorFor('slug')}
+          required
+        />
+        <div className="grid gap-5 md:grid-cols-2">
+          <InputField
+            label={t('projects.fields.titleKo')}
+            name="titleKo"
+            defaultValue={initial?.title.ko}
+            error={errorFor('titleKo')}
+            required
+          />
+          <InputField
+            label={t('projects.fields.titleEn')}
+            name="titleEn"
+            defaultValue={initial?.title.en}
+            error={errorFor('titleEn')}
+            required
+          />
+          <InputField
+            label={t('projects.fields.oneLinerKo')}
+            name="oneLinerKo"
+            defaultValue={initial?.oneLiner.ko}
+            error={errorFor('oneLinerKo')}
+            required
+          />
+          <InputField
+            label={t('projects.fields.oneLinerEn')}
+            name="oneLinerEn"
+            defaultValue={initial?.oneLiner.en}
+            error={errorFor('oneLinerEn')}
+            required
+          />
+        </div>
+
+        <RadioGroupField
+          label={t('projects.fields.dateGranularity')}
+          name="dateGranularity"
+          defaultValue={initial?.dateGranularity ?? 'month'}
+          options={[
+            { value: 'month', label: t('projects.fields.granularityMonth') },
+            { value: 'day', label: t('projects.fields.granularityDay') },
+          ]}
+        />
+
+        <div className="grid gap-5 md:grid-cols-2">
+          <DateMonthField
+            label={t('projects.fields.startDate')}
+            name="startDate"
+            defaultValue={initial?.startDate}
+            error={errorFor('startDate')}
+            required
+          />
+          <DateMonthField
+            label={t('projects.fields.endDate')}
+            name="endDate"
+            defaultValue={initial?.endDate}
+            error={errorFor('endDate')}
+            required
+          />
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          <InputField
+            label={t('projects.fields.roleKo')}
+            name="roleKo"
+            defaultValue={initial?.role?.ko}
+            error={errorFor('roleKo')}
+          />
+          <InputField
+            label={t('projects.fields.roleEn')}
+            name="roleEn"
+            defaultValue={initial?.role?.en}
+            error={errorFor('roleEn')}
+          />
+          <InputField
+            label={t('projects.fields.teamSize')}
+            name="teamSize"
+            type="number"
+            min={1}
+            defaultValue={initial?.teamSize ?? ''}
+            error={errorFor('teamSize')}
+          />
+          <InputField
+            label={t('projects.fields.contribution')}
+            name="contribution"
+            type="number"
+            min={1}
+            max={100}
+            defaultValue={initial?.contribution ?? ''}
+            error={errorFor('contribution')}
+          />
+        </div>
+      </Section>
+
+      {/* Section: status */}
+      <Section title={t('projects.sections.status')}>
+        <CheckboxField
+          label={t('projects.fields.pinned')}
+          name="pinned"
+          defaultChecked={initial?.pinned ?? false}
+        />
+        <CheckboxField
+          label={t('projects.fields.visible')}
+          name="visible"
+          defaultChecked={initial?.visible ?? true}
+        />
+        <InputField
+          label={t('projects.fields.order')}
+          name="order"
+          type="number"
+          defaultValue={initial?.order ?? 0}
+          hint={t('projects.hints.order')}
+        />
+      </Section>
+
+      {/* Section: links */}
+      <Section title={t('projects.sections.links')}>
+        <InputField
+          label={t('projects.fields.demoUrl')}
+          name="demoUrl"
+          type="url"
+          defaultValue={initial?.demoUrl}
+          error={errorFor('demoUrl')}
+        />
+        <InputField
+          label={t('projects.fields.githubUrl')}
+          name="githubUrl"
+          type="url"
+          defaultValue={initial?.githubUrl}
+          error={errorFor('githubUrl')}
+        />
+        <InputField
+          label={t('projects.fields.thumbnailUrl')}
+          name="thumbnailUrl"
+          type="url"
+          defaultValue={initial?.thumbnailUrl}
+          hint={t('projects.hints.thumbnail')}
+          error={errorFor('thumbnailUrl')}
+        />
+      </Section>
+
+      {/* Section: skills */}
+      <Section title={t('projects.sections.skills')}>
+        <MultiSelect
+          name="skillIds"
+          options={skillOptions}
+          defaultValue={initial?.skillIds}
+          searchPlaceholder={t('projects.skillSearch')}
+          emptyMessage={t('projects.skillEmpty')}
+        />
+      </Section>
+
+      {/* Section: description */}
+      <Section title={t('projects.sections.description')}>
+        <LangTabs
+          koLabel="한국어"
+          enLabel="English"
+          koContent={
+            <TextareaField
+              label={t('projects.fields.descriptionKo')}
+              name="descriptionKo"
+              defaultValue={initial?.description.ko}
+              rows={10}
+              error={errorFor('descriptionKo')}
+              required
+            />
+          }
+          enContent={
+            <TextareaField
+              label={t('projects.fields.descriptionEn')}
+              name="descriptionEn"
+              defaultValue={initial?.description.en}
+              rows={10}
+              error={errorFor('descriptionEn')}
+              required
+            />
+          }
+        />
+      </Section>
+
+      {/* Section: issues */}
+      <Section title={t('projects.sections.issues')}>
+        <IssueListEditor name="issues" initial={initialIssues} />
+      </Section>
+
+      <div className="flex justify-end gap-2 pt-2">
+        {onCancel ? (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="inline-flex h-10 items-center rounded-sm border border-border bg-transparent px-4 text-body text-foreground-muted transition-colors duration-150 hover:border-border-strong hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--border-strong)]"
+          >
+            {t('common.cancel')}
+          </button>
+        ) : null}
+        <SaveButton saved={false} />
+      </div>
+    </form>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="space-y-5">
+      <h3 className="border-b border-border pb-2 text-h3 text-foreground">{title}</h3>
+      {children}
+    </section>
+  );
+}

@@ -221,3 +221,86 @@ export function DateMonthField({
     />
   );
 }
+
+interface CheckboxFieldProps {
+  label: string;
+  name: string;
+  defaultChecked?: boolean;
+  hint?: string;
+}
+
+export function CheckboxField({ label, name, defaultChecked, hint }: CheckboxFieldProps) {
+  const id = `field-${name}`;
+  return (
+    <div className="grid gap-2 md:grid-cols-[200px_1fr] md:gap-6">
+      <span aria-hidden className="hidden md:block" />
+      <div className="space-y-1.5">
+        <label
+          htmlFor={id}
+          className="inline-flex cursor-pointer items-center gap-2 text-body text-foreground"
+        >
+          <input
+            type="checkbox"
+            id={id}
+            name={name}
+            defaultChecked={defaultChecked}
+            className="h-4 w-4 rounded-sm border-border accent-accent"
+          />
+          {label}
+        </label>
+        {hint ? (
+          <p className="text-caption text-foreground-subtle">{hint}</p>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+interface RadioOption {
+  value: string;
+  label: string;
+}
+
+interface RadioGroupFieldProps {
+  label: string;
+  name: string;
+  options: RadioOption[];
+  defaultValue?: string;
+  hint?: string;
+}
+
+export function RadioGroupField({
+  label,
+  name,
+  options,
+  defaultValue,
+  hint,
+}: RadioGroupFieldProps) {
+  const id = `field-${name}`;
+  return (
+    <FieldShell label={label} htmlFor={id} hint={hint}>
+      <div role="radiogroup" aria-labelledby={`${id}-label`} className="flex flex-wrap gap-4">
+        {options.map((opt) => {
+          const optId = `${id}-${opt.value}`;
+          return (
+            <label
+              key={opt.value}
+              htmlFor={optId}
+              className="inline-flex cursor-pointer items-center gap-2 text-body text-foreground-muted"
+            >
+              <input
+                type="radio"
+                id={optId}
+                name={name}
+                value={opt.value}
+                defaultChecked={defaultValue === opt.value}
+                className="h-4 w-4 accent-accent"
+              />
+              {opt.label}
+            </label>
+          );
+        })}
+      </div>
+    </FieldShell>
+  );
+}
