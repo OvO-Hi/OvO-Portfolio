@@ -525,9 +525,8 @@ OvO-Portfolio/
 
 Dev journal entries written along the way (Korean):
 
-1. [OvO-Portfolio #1 — Building a CV site, the developer way: planning](https://velog.io/@your-handle/post-1)
-2. [OvO-Portfolio #2 — A late-night fight with Korean fonts in PDF rendering](https://velog.io/@your-handle/post-2)
-3. [OvO-Portfolio #3 — A retrospective: comparing the original plan to the result](https://velog.io/@your-handle/post-3)
+1. [OvO-Portfolio #1 — Building a CV site, the developer way: planning](https://velog.io/@ovo-hi/OvO-Portfolio-1-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%8B%B5%EA%B2%8C-CV-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0-%EA%B8%B0%ED%9A%8D%ED%8E%B8)
+
 
 ---
 
