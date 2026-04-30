@@ -15,9 +15,11 @@ export async function About() {
       className="container-prose scroll-mt-24 py-12 md:py-16"
     >
       <SectionHeading id="about-title" eyebrow="01" title={t('title')} />
-      <div className="max-w-[68ch] space-y-4 text-body text-foreground-muted">
+      <div className="space-y-4 text-body text-foreground-muted">
         {about.paragraphs[locale].map((p, i) => (
-          <p key={i}>{p}</p>
+          <p key={i} className="break-keep">
+            {p}
+          </p>
         ))}
       </div>
     </section>

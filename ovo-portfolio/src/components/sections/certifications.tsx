@@ -24,10 +24,10 @@ export async function Certifications() {
           >
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-h3 text-foreground">{c.name[locale]}</h3>
+                <h3 className="text-h3 text-foreground break-keep">{c.name[locale]}</h3>
                 <Chip variant="subtle">{t(`type.${c.type}`)}</Chip>
               </div>
-              <p className="text-caption text-foreground-muted">{c.issuer[locale]}</p>
+              <p className="text-caption text-foreground-muted break-keep">{c.issuer[locale]}</p>
               {c.score ? (
                 <p className="text-caption text-foreground-subtle">
                   <span className="font-mono">

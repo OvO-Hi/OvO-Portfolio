@@ -24,7 +24,7 @@ export async function Experience() {
               aria-hidden
             />
             <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-              <h3 className="text-h3 text-foreground">
+              <h3 className="text-h3 text-foreground break-keep">
                 {exp.organization[locale]}{' '}
                 <span className="font-normal text-foreground-muted">· {exp.role[locale]}</span>
               </h3>
@@ -32,7 +32,7 @@ export async function Experience() {
                 {formatDateRange(exp.startDate, exp.endDate, 'month', locale)}
               </p>
             </div>
-            <p className="mt-1 max-w-[68ch] text-body text-foreground-muted">
+            <p className="mt-1 text-body text-foreground-muted break-keep">
               {exp.description[locale]}
             </p>
           </li>

@@ -94,6 +94,12 @@ body {
 .markdown-body p {
   margin: 0.75rem 0;
   line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.markdown-body li {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .markdown-body a {
   color: var(--accent);

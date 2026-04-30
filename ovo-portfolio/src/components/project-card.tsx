@@ -54,7 +54,7 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h3 className="text-h3 text-foreground">{project.title[locale]}</h3>
+              <h3 className="text-h3 text-foreground break-keep">{project.title[locale]}</h3>
               {project.pinned ? (
                 <span
                   className="inline-flex items-center gap-1 text-caption text-accent"
@@ -70,7 +70,7 @@ export function ProjectCard({ project, onOpen }: ProjectCardProps) {
           </div>
         </div>
 
-        <p className="text-body text-foreground-muted text-balance">
+        <p className="text-body text-foreground-muted text-balance break-keep">
           {project.oneLiner[locale]}
         </p>
 

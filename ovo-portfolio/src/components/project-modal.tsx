@@ -181,7 +181,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         <header className="flex items-start justify-between gap-4 border-b border-border px-5 py-4 md:px-7 md:py-5">
           <div className="min-w-0 space-y-1.5">
             <div className="flex items-center gap-2">
-              <h2 id={titleId} className="truncate text-h3 text-foreground md:text-[22px]">
+              <h2 id={titleId} className="truncate text-h3 text-foreground md:text-[22px] break-keep">
                 {active.title[locale]}
               </h2>
               {active.pinned ? (
@@ -209,7 +209,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         <div className="flex-1 overflow-y-auto px-5 py-5 md:px-7 md:py-6">
           <div className="space-y-6">
-            <p className="text-body text-foreground text-balance">
+            <p className="text-body text-foreground text-balance break-keep">
               {active.oneLiner[locale]}
             </p>
 

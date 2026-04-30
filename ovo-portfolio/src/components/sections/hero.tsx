@@ -52,7 +52,7 @@ export async function Hero() {
           >
             {profile.name[locale]}
           </h1>
-          <p className="max-w-[40ch] text-h3 font-normal text-foreground-muted text-balance">
+          <p className="text-h3 font-normal text-foreground-muted text-balance break-keep">
             {profile.tagline[locale]}
           </p>
 

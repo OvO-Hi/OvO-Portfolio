@@ -25,10 +25,10 @@ export async function Education() {
           >
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <h3 className="text-h3 text-foreground">{edu.school[locale]}</h3>
+                <h3 className="text-h3 text-foreground break-keep">{edu.school[locale]}</h3>
                 <Chip variant="accent">{t(`status.${edu.status}`)}</Chip>
               </div>
-              <p className="text-body text-foreground-muted">{edu.major[locale]}</p>
+              <p className="text-body text-foreground-muted break-keep">{edu.major[locale]}</p>
               {edu.gpa && !edu.gpa.hidden ? (
                 <p className="text-caption text-foreground-subtle">
                   <span className="font-mono">
