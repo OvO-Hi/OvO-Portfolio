@@ -50,7 +50,9 @@ export const getAbout = cache(async (): Promise<AboutContent> => {
 });
 
 export const getEducations = cache(async (): Promise<Education[]> => {
-  const rows = await prisma.education.findMany({ orderBy: { order: 'asc' } });
+  const rows = await prisma.education.findMany({
+    orderBy: [{ startDate: 'desc' }, { createdAt: 'desc' }],
+  });
   return rows.map((r) => ({
     id: r.id,
     school: { ko: r.schoolKo, en: r.schoolEn },
@@ -95,7 +97,9 @@ export const getSkills = cache(async (): Promise<Skill[]> => {
 });
 
 export const getCertifications = cache(async (): Promise<Certification[]> => {
-  const rows = await prisma.certification.findMany({ orderBy: { order: 'asc' } });
+  const rows = await prisma.certification.findMany({
+    orderBy: [{ date: 'desc' }, { createdAt: 'desc' }],
+  });
   return rows.map((r) => ({
     id: r.id,
     name: { ko: r.nameKo, en: r.nameEn },
@@ -107,7 +111,9 @@ export const getCertifications = cache(async (): Promise<Certification[]> => {
 });
 
 export const getExperiences = cache(async (): Promise<Experience[]> => {
-  const rows = await prisma.experience.findMany({ orderBy: { order: 'asc' } });
+  const rows = await prisma.experience.findMany({
+    orderBy: [{ startDate: 'desc' }, { createdAt: 'desc' }],
+  });
   return rows.map((r) => ({
     id: r.id,
     organization: { ko: r.organizationKo, en: r.organizationEn },
