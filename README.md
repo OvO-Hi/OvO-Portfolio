@@ -9,11 +9,25 @@
 
 ## 미리보기
 
-![메인 페이지](./assets/preview-main.png)
+#### 메인 페이지 (한국어)
 
-| 어드민 폼 | PDF 이력서 |
-| --- | --- |
-| ![어드민](./assets/preview-admin.png) | ![PDF](./assets/preview-pdf.png) |
+![메인 페이지 (한국어)](./assets/preview-main-ko.png)
+
+#### 메인 페이지 (English)
+
+![메인 페이지 (English)](./assets/preview-main-eng.png)
+
+#### 어드민 폼
+
+![어드민 폼](./assets/preview-admin.png)
+
+#### PDF 이력서 (한국어)
+
+![PDF 이력서 (한국어)](./assets/preview-pdf-ko.png)
+
+#### PDF 이력서 (English)
+
+![PDF 이력서 (English)](./assets/preview-pdf-eng.png)
 
 ---
 
@@ -311,11 +325,25 @@ seayun9845@gmail.com
 
 ## Preview
 
-![Main page](./assets/preview-main.png)
+#### Main page (Korean)
 
-| Admin form | PDF résumé |
-| --- | --- |
-| ![Admin](./assets/preview-admin.png) | ![PDF](./assets/preview-pdf.png) |
+![Main page (Korean)](./assets/preview-main-ko.png)
+
+#### Main page (English)
+
+![Main page (English)](./assets/preview-main-eng.png)
+
+#### Admin form
+
+![Admin form](./assets/preview-admin.png)
+
+#### PDF résumé (Korean)
+
+![PDF résumé (Korean)](./assets/preview-pdf-ko.png)
+
+#### PDF résumé (English)
+
+![PDF résumé (English)](./assets/preview-pdf-eng.png)
 
 ---
 
