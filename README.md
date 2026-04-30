@@ -300,9 +300,8 @@ erDiagram
 
 만들면서 적은 개발 일지:
 
-1. [OvO-Portfolio #1 — 개발자답게 CV 사이트 만들어보기 — 기획편](https://velog.io/@your-handle/post-1)
-2. [OvO-Portfolio #2 — PDF 이력서 다운로드 만들다가 새벽 4시까지 한글 폰트랑 싸운 썰](https://velog.io/@your-handle/post-2)
-3. [OvO-Portfolio #3 — 처음 계획이랑 비교해보는 최종 회고편](https://velog.io/@your-handle/post-3)
+1. [OvO-Portfolio #1 — 개발자답게 CV 사이트 만들어보기 — 기획편](https://velog.io/@ovo-hi/OvO-Portfolio-1-%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%8B%B5%EA%B2%8C-CV-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0-%EA%B8%B0%ED%9A%8D%ED%8E%B8)
+
 
 ---
 
