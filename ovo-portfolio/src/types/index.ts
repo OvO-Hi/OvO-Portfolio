@@ -56,7 +56,7 @@ export interface Project {
   title: Localized<string>;
   oneLiner: Localized<string>;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   dateGranularity: 'day' | 'month';
   role?: Localized<string>;
   teamSize?: number;
@@ -86,7 +86,7 @@ export interface Experience {
   organization: Localized<string>;
   role: Localized<string>;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   description: Localized<string>;
 }
 

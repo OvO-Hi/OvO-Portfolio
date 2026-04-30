@@ -247,12 +247,14 @@ const CATEGORY_ORDER: SkillCategory[] = [
   'tool',
 ];
 
-function formatRange(start: string, end: string, locale: Locale): string {
+function formatRange(start: string, end: string | null | undefined, locale: Locale): string {
   const fmt = (s: string) => {
     const [y, m] = s.split('-');
     return locale === 'ko' ? `${y}.${m}` : `${y}-${m}`;
   };
-  return `${fmt(start)} – ${fmt(end)}`;
+  const present = locale === 'ko' ? '현재' : 'Present';
+  const endStr = end ? fmt(end) : present;
+  return `${fmt(start)} – ${endStr}`;
 }
 
 function stripProtocol(url: string): string {

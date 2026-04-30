@@ -26,7 +26,7 @@ interface ParsedData {
   roleKo: string;
   roleEn: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   descriptionKo: string;
   descriptionEn: string;
 }
@@ -45,7 +45,8 @@ function parseFormData(formData: FormData): ParseResult {
   const roleKo = get('roleKo');
   const roleEn = get('roleEn');
   const startDate = get('startDate');
-  const endDate = get('endDate');
+  const endDateRaw = get('endDate');
+  const isPresent = formData.get('isPresent') === 'on';
   const descriptionKo = get('descriptionKo');
   const descriptionEn = get('descriptionEn');
 
@@ -53,8 +54,13 @@ function parseFormData(formData: FormData): ParseResult {
   if (!organizationEn) errors.organizationEn = 'required';
   if (!startDate) errors.startDate = 'required';
   else if (!MONTH_RE.test(startDate)) errors.startDate = 'invalidDate';
-  if (!endDate) errors.endDate = 'required';
-  else if (!MONTH_RE.test(endDate)) errors.endDate = 'invalidDate';
+
+  let endDate: string | null = null;
+  if (!isPresent) {
+    if (!endDateRaw) errors.endDate = 'required';
+    else if (!MONTH_RE.test(endDateRaw)) errors.endDate = 'invalidDate';
+    else endDate = endDateRaw;
+  }
 
   if (Object.keys(errors).length > 0) return { errors };
 

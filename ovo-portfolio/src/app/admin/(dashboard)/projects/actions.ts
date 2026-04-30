@@ -44,7 +44,7 @@ interface ParsedProjectData {
   oneLinerKo: string;
   oneLinerEn: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   dateGranularity: Project['dateGranularity'];
   roleKo: string | null;
   roleEn: string | null;
@@ -78,7 +78,8 @@ function parseFormData(formData: FormData): ParseResult {
   const oneLinerKo = get('oneLinerKo');
   const oneLinerEn = get('oneLinerEn');
   const startDate = get('startDate');
-  const endDate = get('endDate');
+  const endDateRaw = get('endDate');
+  const isPresent = formData.get('isPresent') === 'on';
   const dateGranularity = (get('dateGranularity') || 'month') as Project['dateGranularity'];
   const roleKo = get('roleKo');
   const roleEn = get('roleEn');
@@ -110,8 +111,13 @@ function parseFormData(formData: FormData): ParseResult {
 
   if (!startDate) errors.startDate = 'required';
   else if (!isValidDate(startDate, dateGranularity)) errors.startDate = 'invalidDate';
-  if (!endDate) errors.endDate = 'required';
-  else if (!isValidDate(endDate, dateGranularity)) errors.endDate = 'invalidDate';
+
+  let endDate: string | null = null;
+  if (!isPresent) {
+    if (!endDateRaw) errors.endDate = 'required';
+    else if (!isValidDate(endDateRaw, dateGranularity)) errors.endDate = 'invalidDate';
+    else endDate = endDateRaw;
+  }
 
   let teamSize: number | null = null;
   if (teamSizeRaw) {

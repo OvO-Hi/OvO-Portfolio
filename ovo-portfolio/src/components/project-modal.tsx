@@ -10,6 +10,7 @@ import { Markdown } from '@/components/ui/markdown';
 import { IssueItem } from '@/components/issue-item';
 import { skillById } from '@/data/skills-seed';
 import { formatDateRange, cn } from '@/lib/utils';
+import { isYoutubeShorts, toYoutubeEmbedUrl } from '@/lib/youtube';
 import type { Locale, Project } from '@/types';
 
 interface ProjectModalProps {
@@ -21,16 +22,11 @@ const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function toEmbedUrl(url: string): string | null {
+  const youtubeEmbed = toYoutubeEmbedUrl(url);
+  if (youtubeEmbed) return youtubeEmbed;
+
   try {
     const u = new URL(url);
-    if (u.hostname.includes('youtube.com')) {
-      const id = u.searchParams.get('v');
-      if (id) return `https://www.youtube.com/embed/${id}`;
-    }
-    if (u.hostname === 'youtu.be') {
-      const id = u.pathname.slice(1);
-      if (id) return `https://www.youtube.com/embed/${id}`;
-    }
     if (u.hostname.includes('vimeo.com')) {
       const id = u.pathname.split('/').filter(Boolean)[0];
       if (id) return `https://player.vimeo.com/video/${id}`;
@@ -142,6 +138,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
   const embedUrl = active.demoUrl ? toEmbedUrl(active.demoUrl) : null;
+  const isShorts = active.demoUrl ? isYoutubeShorts(active.demoUrl) : false;
 
   return createPortal(
     <div
@@ -255,19 +252,37 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             {embedUrl ? (
               <div className="space-y-2">
                 <h3 className="text-caption text-foreground-subtle">{t('demoEmbed')}</h3>
-                <div className="overflow-hidden rounded-[8px] border border-border bg-background-muted">
-                  <div className="relative aspect-video w-full">
+                <div
+                  className={cn(
+                    'overflow-hidden rounded-[8px] border border-border bg-background-muted',
+                    isShorts && 'mx-auto max-w-[360px]'
+                  )}
+                >
+                  <div className={cn('relative w-full', isShorts ? 'aspect-[9/16]' : 'aspect-video')}>
                     <iframe
                       src={embedUrl}
                       title={`${active.title[locale]} — ${t('demoEmbed')}`}
                       className="absolute inset-0 h-full w-full"
                       loading="lazy"
-                      referrerPolicy="no-referrer"
+                      referrerPolicy="strict-origin-when-cross-origin"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                     />
                   </div>
                 </div>
+                {active.demoUrl ? (
+                  <div className="flex justify-end">
+                    <a
+                      href={active.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-caption text-foreground-subtle transition-colors duration-150 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
+                    >
+                      <ExternalLink className="h-3 w-3" aria-hidden />
+                      <span>{t('demoOpenExternal')}</span>
+                    </a>
+                  </div>
+                ) : null}
               </div>
             ) : null}
 

@@ -68,6 +68,7 @@
     "skills": "사용 스킬",
     "overview": "개요",
     "demoEmbed": "데모",
+    "demoOpenExternal": "직접 보기",
     "issues": "이슈 & 해결",
     "issueProblem": "문제",
     "issueSolution": "해결",
@@ -119,7 +120,8 @@
       "delete": "삭제",
       "close": "닫기",
       "yes": "네",
-      "no": "아니오"
+      "no": "아니오",
+      "present": "현재 진행 중"
     },
     "markdown": {
       "tabEdit": "편집",

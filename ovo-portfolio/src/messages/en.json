@@ -68,6 +68,7 @@
     "skills": "Skills",
     "overview": "Overview",
     "demoEmbed": "Demo",
+    "demoOpenExternal": "Open original",
     "issues": "Issues & Solutions",
     "issueProblem": "Problem",
     "issueSolution": "Solution",
@@ -119,7 +120,8 @@
       "delete": "Delete",
       "close": "Close",
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "present": "Currently ongoing"
     },
     "markdown": {
       "tabEdit": "Edit",

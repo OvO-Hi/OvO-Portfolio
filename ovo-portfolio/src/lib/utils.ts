@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatDateRange(
   start: string,
-  end: string,
+  end: string | null | undefined,
   granularity: 'day' | 'month' = 'month',
   locale: 'ko' | 'en' = 'ko'
 ): string {
@@ -22,5 +22,7 @@ export function formatDateRange(
     if (granularity === 'day' && d) return `${monthName} ${Number(d)}, ${y}`;
     return `${monthName} ${y}`;
   };
-  return `${fmt(start)} – ${fmt(end)}`;
+  const present = locale === 'ko' ? '현재' : 'Present';
+  const endStr = end ? fmt(end) : present;
+  return `${fmt(start)} – ${endStr}`;
 }

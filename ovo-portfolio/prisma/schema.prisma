@@ -122,7 +122,7 @@ model Experience {
   roleKo         String
   roleEn         String
   startDate      String
-  endDate        String
+  endDate        String?
   descriptionKo  String
   descriptionEn  String
   order          Int      @default(0)
@@ -138,7 +138,7 @@ model Project {
   oneLinerKo      String
   oneLinerEn      String
   startDate       String
-  endDate         String
+  endDate         String?
   dateGranularity DateGranularity
   roleKo          String?
   roleEn          String?

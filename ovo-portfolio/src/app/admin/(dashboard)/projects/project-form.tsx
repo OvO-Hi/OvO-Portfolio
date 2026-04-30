@@ -46,6 +46,8 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
   const [roleEn, setRoleEn] = useState(initial?.role?.en ?? '');
   const [descriptionKo, setDescriptionKo] = useState(initial?.description.ko ?? '');
   const [descriptionEn, setDescriptionEn] = useState(initial?.description.en ?? '');
+  const [endDate, setEndDate] = useState(initial?.endDate ?? '');
+  const [isPresent, setIsPresent] = useState(initial ? initial.endDate === null : false);
 
   const action =
     initial?.id !== undefined
@@ -167,13 +169,27 @@ export function ProjectForm({ initial, skills, onSuccess, onCancel }: ProjectFor
             error={errorFor('startDate')}
             required
           />
-          <DateMonthField
-            label={t('projects.fields.endDate')}
-            name="endDate"
-            defaultValue={initial?.endDate}
-            error={errorFor('endDate')}
-            required
-          />
+          <div className="space-y-2">
+            <DateMonthField
+              label={t('projects.fields.endDate')}
+              name="endDate"
+              value={isPresent ? '' : endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              error={errorFor('endDate')}
+              required={!isPresent}
+              disabled={isPresent}
+            />
+            <label className="inline-flex cursor-pointer items-center gap-2 text-caption text-foreground-muted">
+              <input
+                type="checkbox"
+                name="isPresent"
+                checked={isPresent}
+                onChange={(e) => setIsPresent(e.target.checked)}
+                className="h-4 w-4 rounded-sm border-border accent-accent"
+              />
+              {t('common.present')}
+            </label>
+          </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
