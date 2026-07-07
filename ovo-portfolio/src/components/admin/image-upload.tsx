@@ -42,6 +42,12 @@ export function ImageUpload({
     fd.append('prefix', prefix);
     startTransition(async () => {
       const result = await uploadImageAction(fd);
+      if (!result) {
+        // 서버 액션이 값 없이 종료된 경우(예상치 못한 예외 등) 방어.
+        console.error('[ImageUpload] uploadImageAction 결과가 비어 있습니다.', result);
+        setError(t('errors.uploadFailed'));
+        return;
+      }
       if (result.ok) {
         setUrl(result.url);
       } else {
