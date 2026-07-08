@@ -10,6 +10,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { ImagePlus, Trash2, Upload } from 'lucide-react';
 import { uploadImageAction } from '@/lib/upload-action';
+import { checkImage } from '@/lib/image-constraints';
 import { cn } from '@/lib/utils';
 
 interface ImageUploadProps {
@@ -58,6 +59,19 @@ export function ImageUpload({
 
   const onFile = (file: File | undefined) => {
     if (!file) return;
+    // 서버 왕복 전 즉시 검증 — 파일 크기 초과 / 잘못된 형식이면 바로 정확한 메시지 표시.
+    // (5MB 초과 파일은 서버 액션 body 제한에도 걸리므로 클라 검증이 특히 중요)
+    const code = checkImage(file);
+    if (code) {
+      const key =
+        code === 'invalidType'
+          ? 'imageInvalidType'
+          : code === 'tooLarge'
+            ? 'imageTooLarge'
+            : 'imageEmpty';
+      setError(t(`errors.${key}`));
+      return;
+    }
     upload(file);
   };
 

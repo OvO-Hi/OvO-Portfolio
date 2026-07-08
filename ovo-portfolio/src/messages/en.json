@@ -257,7 +257,8 @@
         "startDate": "Start",
         "endDate": "End",
         "descriptionKo": "Description (Korean)",
-        "descriptionEn": "Description (English)"
+        "descriptionEn": "Description (English)",
+        "image": "Image (optional)"
       }
     },
     "skills": {

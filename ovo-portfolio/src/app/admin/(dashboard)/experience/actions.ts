@@ -29,6 +29,7 @@ interface ParsedData {
   endDate: string | null;
   descriptionKo: string;
   descriptionEn: string;
+  imageUrl: string | null;
 }
 
 interface ParseResult {
@@ -49,6 +50,7 @@ function parseFormData(formData: FormData): ParseResult {
   const isPresent = formData.get('isPresent') === 'on';
   const descriptionKo = get('descriptionKo');
   const descriptionEn = get('descriptionEn');
+  const imageUrl = get('imageUrl') || null;
 
   if (!organizationKo) errors.organizationKo = 'required';
   if (!organizationEn) errors.organizationEn = 'required';
@@ -74,6 +76,7 @@ function parseFormData(formData: FormData): ParseResult {
       endDate,
       descriptionKo,
       descriptionEn,
+      imageUrl,
     },
   };
 }

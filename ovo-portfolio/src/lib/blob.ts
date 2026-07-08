@@ -1,25 +1,16 @@
 import { put, del } from '@vercel/blob';
+import { ALLOWED_MIME, MAX_BYTES, checkImage, type ImageValidationCode } from './image-constraints';
 
-export const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp'] as const;
-export const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
-
-export type ImageValidationCode =
-  | 'invalidType'
-  | 'tooLarge'
-  | 'empty'
-  | 'unknown';
+export { ALLOWED_MIME, MAX_BYTES };
+export type { ImageValidationCode };
 
 export interface ImageValidationError {
   code: ImageValidationCode;
 }
 
 export function validateImage(file: File): ImageValidationError | null {
-  if (!file || file.size === 0) return { code: 'empty' };
-  if (file.size > MAX_BYTES) return { code: 'tooLarge' };
-  if (!(ALLOWED_MIME as readonly string[]).includes(file.type)) {
-    return { code: 'invalidType' };
-  }
-  return null;
+  const code = checkImage(file);
+  return code ? { code } : null;
 }
 
 function safeName(name: string): string {

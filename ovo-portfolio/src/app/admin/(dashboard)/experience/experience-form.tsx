@@ -8,6 +8,7 @@ import {
   InputField,
   TextareaField,
 } from '@/components/admin/form-field';
+import { ImageUpload } from '@/components/admin/image-upload';
 import { SaveButton } from '@/components/admin/save-button';
 import { StatusMessage } from '@/components/admin/status-message';
 import { TranslateButton } from '@/components/admin/translate-button';
@@ -131,6 +132,19 @@ export function ExperienceForm({ initial, onSuccess, onCancel }: ExperienceFormP
             {t('common.present')}
           </label>
         </div>
+      </div>
+
+      <div className="space-y-1.5">
+        <span className="block text-caption font-medium text-foreground">
+          {t('experience.fields.image')}
+        </span>
+        <ImageUpload
+          name="imageUrl"
+          defaultValue={initial?.imageUrl}
+          prefix="experience-image"
+          shape="video"
+          ariaLabel={t('experience.fields.image')}
+        />
       </div>
 
       <TextareaField

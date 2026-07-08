@@ -257,7 +257,8 @@
         "startDate": "시작",
         "endDate": "종료",
         "descriptionKo": "한 줄 설명 (한국어)",
-        "descriptionEn": "한 줄 설명 (영어)"
+        "descriptionEn": "한 줄 설명 (영어)",
+        "image": "이미지 (선택)"
       }
     },
     "skills": {

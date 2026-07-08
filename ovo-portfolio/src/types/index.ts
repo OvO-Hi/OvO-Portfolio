@@ -88,6 +88,7 @@ export interface Experience {
   startDate: string;
   endDate: string | null;
   description: Localized<string>;
+  imageUrl?: string;
 }
 
 export interface AboutContent {
