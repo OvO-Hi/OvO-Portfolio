@@ -37,6 +37,11 @@ export function TranslateButton({
         mode,
         context,
       });
+      if (!result) {
+        console.error('[TranslateButton] translateKoToEn 결과가 비어 있습니다.', result);
+        setError(tErr('translateFailed'));
+        return;
+      }
       if (result.ok) {
         onTranslated(result.en);
       } else if (result.error === 'unauthorized') {

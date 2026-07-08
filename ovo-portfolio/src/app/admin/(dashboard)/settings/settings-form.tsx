@@ -33,6 +33,11 @@ export function SettingsForm({ initial }: SettingsFormProps) {
     setTestState({ status: 'idle' });
     startTransition(async () => {
       const result = await testApiKey();
+      if (!result) {
+        console.error('[SettingsForm] testApiKey 결과가 비어 있습니다.', result);
+        setTestState({ status: 'error', message: 'unknown' });
+        return;
+      }
       if (result.ok) setTestState({ status: 'success' });
       else setTestState({ status: 'error', message: result.error ?? 'unknown' });
     });
