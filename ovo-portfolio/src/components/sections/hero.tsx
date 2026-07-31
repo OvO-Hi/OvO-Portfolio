@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Mail, Phone } from 'lucide-react';
-import { GithubIcon } from '@/components/ui/icons';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/icons';
 import { PhoneCopy } from '@/components/phone-copy';
 import { getProfile } from '@/lib/queries';
 import type { Locale } from '@/types';
@@ -79,6 +79,20 @@ export async function Hero() {
                 <span className="font-mono">GitHub</span>
               </a>
             </li>
+            {profile.linkedinUrl ? (
+              <li>
+                <a
+                  href={profile.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${t('contactLinkedin')}: ${profile.linkedinUrl}`}
+                  className="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
+                >
+                  <LinkedinIcon className="h-3.5 w-3.5" aria-hidden />
+                  <span className="font-mono">LinkedIn</span>
+                </a>
+              </li>
+            ) : null}
             <li className="group inline-flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5">
                 <Phone className="h-3.5 w-3.5" aria-hidden />

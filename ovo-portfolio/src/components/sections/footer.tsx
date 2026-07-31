@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Download, Mail } from 'lucide-react';
-import { GithubIcon } from '@/components/ui/icons';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/icons';
 import { SecretTrigger } from '@/components/secret-trigger';
 import { getProfile } from '@/lib/queries';
 import type { Locale } from '@/types';
@@ -50,6 +50,20 @@ export async function Footer() {
               >
                 <GithubIcon className="h-3.5 w-3.5" aria-hidden />
                 <span className="font-mono">GitHub</span>
+              </a>
+            </li>
+          ) : null}
+          {profile.linkedinUrl ? (
+            <li>
+              <a
+                href={profile.linkedinUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 transition-colors duration-150 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
+                aria-label="LinkedIn"
+              >
+                <LinkedinIcon className="h-3.5 w-3.5" aria-hidden />
+                <span className="font-mono">LinkedIn</span>
               </a>
             </li>
           ) : null}

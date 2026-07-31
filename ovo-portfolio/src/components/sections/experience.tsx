@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getExperiences } from '@/lib/queries';
+import { ExperienceImage } from '@/components/experience-image-modal';
 import { SectionHeading } from './section-heading';
 import { formatDateRange } from '@/lib/utils';
 import type { Locale } from '@/types';
@@ -26,14 +26,8 @@ export async function Experience() {
             />
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
               {exp.imageUrl ? (
-                <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-sm border border-border bg-background-muted sm:aspect-[4/3] sm:w-40">
-                  <Image
-                    src={exp.imageUrl}
-                    alt=""
-                    fill
-                    sizes="(min-width: 640px) 160px, 100vw"
-                    className="object-cover"
-                  />
+                <div className="w-full shrink-0 sm:w-40">
+                  <ExperienceImage experience={exp} />
                 </div>
               ) : null}
               <div className="min-w-0 flex-1">

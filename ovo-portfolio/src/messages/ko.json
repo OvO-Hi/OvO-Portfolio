@@ -11,6 +11,7 @@
     "contactEmail": "이메일",
     "contactPhone": "전화",
     "contactGithub": "깃허브",
+    "contactLinkedin": "링크드인",
     "copyPhone": "전화번호 복사",
     "phoneCopied": "복사됨"
   },
@@ -50,8 +51,14 @@
     },
     "scoreLabel": "점수"
   },
+  "common": {
+    "enlargeImage": "이미지 확대",
+    "close": "닫기"
+  },
   "experience": {
-    "title": "경력 / 대외활동"
+    "title": "경력 / 대외활동",
+    "viewProject": "관련 프로젝트 보기",
+    "imageAlt": "{organization} 활동 사진"
   },
   "projects": {
     "title": "프로젝트",
@@ -186,10 +193,12 @@
         "email": "이메일",
         "phone": "전화번호",
         "github": "GitHub URL",
+        "linkedinUrl": "LinkedIn URL",
         "profileImage": "프로필 이미지 URL"
       },
       "hints": {
         "github": "예: https://github.com/yourname",
+        "linkedinUrl": "예: https://www.linkedin.com/in/username",
         "profileImage": "비워두면 OvO 모노그램이 표시됩니다."
       }
     },
@@ -258,7 +267,9 @@
         "endDate": "종료",
         "descriptionKo": "한 줄 설명 (한국어)",
         "descriptionEn": "한 줄 설명 (영어)",
-        "image": "이미지 (선택)"
+        "image": "이미지 (선택)",
+        "project": "관련 프로젝트 (선택)",
+        "projectNone": "없음"
       }
     },
     "skills": {

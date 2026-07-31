@@ -62,6 +62,7 @@ export async function getExperiencesForAdmin(): Promise<AdminExperience[]> {
     endDate: r.endDate,
     description: { ko: r.descriptionKo, en: r.descriptionEn },
     imageUrl: r.imageUrl ?? undefined,
+    projectId: r.projectId ?? undefined,
   }));
 }
 

@@ -56,6 +56,7 @@ model Profile {
   email        String
   phone        String
   github       String
+  linkedinUrl  String?
   profileImage String   @default("")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -126,9 +127,13 @@ model Experience {
   descriptionKo  String
   descriptionEn  String
   imageUrl       String?
+  projectId      String?
+  project        Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
   order          Int      @default(0)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  @@index([projectId])
 }
 
 model Project {
@@ -157,6 +162,7 @@ model Project {
   updatedAt       DateTime        @updatedAt
   skills          ProjectSkill[]
   issues          ProjectIssue[]
+  experiences     Experience[]
 }
 
 model ProjectIssue {

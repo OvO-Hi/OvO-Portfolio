@@ -103,6 +103,14 @@ export function ProfileForm({ initial }: ProfileFormProps) {
         hint={t('profile.hints.github')}
         error={errorFor('github')}
       />
+      <InputField
+        label={t('profile.fields.linkedinUrl')}
+        name="linkedinUrl"
+        type="url"
+        defaultValue={initial.linkedinUrl ?? ''}
+        hint={t('profile.hints.linkedinUrl')}
+        error={errorFor('linkedinUrl')}
+      />
       <div className="space-y-1.5">
         <span className="block text-caption font-medium text-foreground">
           {t('profile.fields.profileImage')}

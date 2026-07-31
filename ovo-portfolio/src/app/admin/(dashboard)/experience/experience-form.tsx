@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   DateMonthField,
   InputField,
+  SelectField,
   TextareaField,
 } from '@/components/admin/form-field';
 import { ImageUpload } from '@/components/admin/image-upload';
@@ -14,16 +15,28 @@ import { StatusMessage } from '@/components/admin/status-message';
 import { TranslateButton } from '@/components/admin/translate-button';
 import { createExperience, updateExperience } from './actions';
 import { experienceInitialState, type ExperienceActionState } from './types';
-import type { Experience } from '@/types';
+import type { Experience, Locale, Localized } from '@/types';
+
+export interface ProjectOption {
+  id: string;
+  title: Localized<string>;
+}
 
 interface ExperienceFormProps {
   initial?: Experience;
+  projectOptions: ProjectOption[];
   onSuccess?: () => void;
   onCancel?: () => void;
 }
 
-export function ExperienceForm({ initial, onSuccess, onCancel }: ExperienceFormProps) {
+export function ExperienceForm({
+  initial,
+  projectOptions,
+  onSuccess,
+  onCancel,
+}: ExperienceFormProps) {
   const t = useTranslations('admin');
+  const locale = useLocale() as Locale;
 
   const [organizationKo, setOrganizationKo] = useState(initial?.organization.ko ?? '');
   const [organizationEn, setOrganizationEn] = useState(initial?.organization.en ?? '');
@@ -146,6 +159,16 @@ export function ExperienceForm({ initial, onSuccess, onCancel }: ExperienceFormP
           ariaLabel={t('experience.fields.image')}
         />
       </div>
+
+      <SelectField
+        label={t('experience.fields.project')}
+        name="projectId"
+        defaultValue={initial?.projectId ?? ''}
+        options={[
+          { value: '', label: t('experience.fields.projectNone') },
+          ...projectOptions.map((p) => ({ value: p.id, label: p.title[locale] })),
+        ]}
+      />
 
       <TextareaField
         label={t('experience.fields.descriptionKo')}

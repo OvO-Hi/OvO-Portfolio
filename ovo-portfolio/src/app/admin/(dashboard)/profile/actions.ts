@@ -35,6 +35,7 @@ export async function updateProfile(
     email: get('email'),
     phone: get('phone'),
     github: get('github'),
+    linkedinUrl: get('linkedinUrl') || null,
     profileImage: get('profileImage'),
   };
 
@@ -44,6 +45,7 @@ export async function updateProfile(
   }
   if (data.email && !EMAIL_RE.test(data.email)) errors.email = 'invalidEmail';
   if (data.github && !URL_RE.test(data.github)) errors.github = 'invalidUrl';
+  if (data.linkedinUrl && !URL_RE.test(data.linkedinUrl)) errors.linkedinUrl = 'invalidUrl';
   if (data.profileImage && !URL_RE.test(data.profileImage)) errors.profileImage = 'invalidUrl';
 
   if (Object.keys(errors).length > 0) {

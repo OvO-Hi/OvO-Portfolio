@@ -6,15 +6,16 @@ import { Pencil } from 'lucide-react';
 import { EditCard, EditCardHeader } from '@/components/admin/edit-card';
 import { DeleteButton } from '@/components/admin/delete-button';
 import { formatDateRange } from '@/lib/utils';
-import { ExperienceForm } from './experience-form';
+import { ExperienceForm, type ProjectOption } from './experience-form';
 import { deleteExperience } from './actions';
 import type { Experience } from '@/types';
 
 interface ExperienceCardProps {
   experience: Experience;
+  projectOptions: ProjectOption[];
 }
 
-export function ExperienceCard({ experience }: ExperienceCardProps) {
+export function ExperienceCard({ experience, projectOptions }: ExperienceCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const t = useTranslations('admin');
 
@@ -23,6 +24,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       <EditCard>
         <ExperienceForm
           initial={experience}
+          projectOptions={projectOptions}
           onSuccess={() => setIsEditing(false)}
           onCancel={() => setIsEditing(false)}
         />

@@ -8,6 +8,7 @@ export interface Profile {
   email: string;
   phone: string;
   github: string;
+  linkedinUrl?: string;
   profileImage: string;
 }
 
@@ -89,6 +90,8 @@ export interface Experience {
   endDate: string | null;
   description: Localized<string>;
   imageUrl?: string;
+  projectId?: string;
+  project?: { slug: string; title: Localized<string> };
 }
 
 export interface AboutContent {

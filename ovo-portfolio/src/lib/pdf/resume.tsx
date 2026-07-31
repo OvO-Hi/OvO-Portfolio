@@ -293,6 +293,9 @@ export function ResumeDocument({ data }: ResumeDocumentProps) {
               {profile.github ? (
                 <Text style={styles.contactItemAccent}>{stripProtocol(profile.github)}</Text>
               ) : null}
+              {profile.linkedinUrl ? (
+                <Text style={styles.contactItemAccent}>{stripProtocol(profile.linkedinUrl)}</Text>
+              ) : null}
             </View>
           </View>
           {profile.profileImage ? (

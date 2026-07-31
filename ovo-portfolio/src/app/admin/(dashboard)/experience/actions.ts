@@ -30,6 +30,7 @@ interface ParsedData {
   descriptionKo: string;
   descriptionEn: string;
   imageUrl: string | null;
+  projectId: string | null;
 }
 
 interface ParseResult {
@@ -51,6 +52,7 @@ function parseFormData(formData: FormData): ParseResult {
   const descriptionKo = get('descriptionKo');
   const descriptionEn = get('descriptionEn');
   const imageUrl = get('imageUrl') || null;
+  const projectId = get('projectId') || null;
 
   if (!organizationKo) errors.organizationKo = 'required';
   if (!organizationEn) errors.organizationEn = 'required';
@@ -77,6 +79,7 @@ function parseFormData(formData: FormData): ParseResult {
       descriptionKo,
       descriptionEn,
       imageUrl,
+      projectId,
     },
   };
 }

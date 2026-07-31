@@ -38,6 +38,7 @@ export const getProfile = cache(async (): Promise<Profile> => {
     email: row.email,
     phone: row.phone,
     github: row.github,
+    linkedinUrl: row.linkedinUrl ?? undefined,
     profileImage: row.profileImage,
   };
 });
@@ -113,6 +114,9 @@ export const getCertifications = cache(async (): Promise<Certification[]> => {
 export const getExperiences = cache(async (): Promise<Experience[]> => {
   const rows = await prisma.experience.findMany({
     orderBy: [{ startDate: 'desc' }, { createdAt: 'desc' }],
+    include: {
+      project: { select: { slug: true, titleKo: true, titleEn: true, visible: true } },
+    },
   });
   return rows.map((r) => ({
     id: r.id,
@@ -122,6 +126,12 @@ export const getExperiences = cache(async (): Promise<Experience[]> => {
     endDate: r.endDate,
     description: { ko: r.descriptionKo, en: r.descriptionEn },
     imageUrl: r.imageUrl ?? undefined,
+    projectId: r.projectId ?? undefined,
+    // Only expose the link when the target project is publicly visible.
+    project:
+      r.project && r.project.visible
+        ? { slug: r.project.slug, title: { ko: r.project.titleKo, en: r.project.titleEn } }
+        : undefined,
   }));
 });
 

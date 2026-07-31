@@ -5,14 +5,15 @@ import { useTranslations } from 'next-intl';
 import { Plus } from 'lucide-react';
 import { EditCard } from '@/components/admin/edit-card';
 import { ExperienceCard } from './experience-card';
-import { ExperienceForm } from './experience-form';
+import { ExperienceForm, type ProjectOption } from './experience-form';
 import type { AdminExperience } from '@/lib/admin-queries';
 
 interface ExperienceManagerProps {
   items: AdminExperience[];
+  projectOptions: ProjectOption[];
 }
 
-export function ExperienceManager({ items }: ExperienceManagerProps) {
+export function ExperienceManager({ items, projectOptions }: ExperienceManagerProps) {
   const [addingNew, setAddingNew] = useState(false);
   const t = useTranslations('admin');
 
@@ -27,7 +28,7 @@ export function ExperienceManager({ items }: ExperienceManagerProps) {
       <ul className="space-y-3">
         {items.map((item) => (
           <li key={item.id}>
-            <ExperienceCard experience={item} />
+            <ExperienceCard experience={item} projectOptions={projectOptions} />
           </li>
         ))}
         {addingNew ? (
@@ -37,6 +38,7 @@ export function ExperienceManager({ items }: ExperienceManagerProps) {
                 <h3 className="text-h3 text-foreground">{t('experience.newItem')}</h3>
               </header>
               <ExperienceForm
+                projectOptions={projectOptions}
                 onSuccess={() => setAddingNew(false)}
                 onCancel={() => setAddingNew(false)}
               />

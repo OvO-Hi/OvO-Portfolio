@@ -11,6 +11,7 @@
     "contactEmail": "Email",
     "contactPhone": "Phone",
     "contactGithub": "GitHub",
+    "contactLinkedin": "LinkedIn",
     "copyPhone": "Copy phone number",
     "phoneCopied": "Copied"
   },
@@ -50,8 +51,14 @@
     },
     "scoreLabel": "Score"
   },
+  "common": {
+    "enlargeImage": "Enlarge image",
+    "close": "Close"
+  },
   "experience": {
-    "title": "Experience"
+    "title": "Experience",
+    "viewProject": "View related project",
+    "imageAlt": "{organization} activity photo"
   },
   "projects": {
     "title": "Projects",
@@ -186,10 +193,12 @@
         "email": "Email",
         "phone": "Phone",
         "github": "GitHub URL",
+        "linkedinUrl": "LinkedIn URL",
         "profileImage": "Profile image URL"
       },
       "hints": {
         "github": "e.g. https://github.com/yourname",
+        "linkedinUrl": "e.g. https://www.linkedin.com/in/username",
         "profileImage": "Leave blank to show the OvO monogram."
       }
     },
@@ -258,7 +267,9 @@
         "endDate": "End",
         "descriptionKo": "Description (Korean)",
         "descriptionEn": "Description (English)",
-        "image": "Image (optional)"
+        "image": "Image (optional)",
+        "project": "Related project (optional)",
+        "projectNone": "None"
       }
     },
     "skills": {
